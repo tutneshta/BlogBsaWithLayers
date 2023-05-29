@@ -36,7 +36,7 @@ namespace BlogBsa.Service.Implementations
             {
                 await _signInManager.SignInAsync(user, false);
 
-                var userRole = new Role() { Name = "Пользователь", SecurityLvl = 0 };
+                var userRole = new Role() { Name = "Пользователь", Description = null };
                 await _roleManager.CreateAsync(userRole);
 
                 var currentUser = await _userManager.FindByIdAsync(Convert.ToString(user.Id));

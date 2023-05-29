@@ -12,6 +12,6 @@ namespace BlogBsa.Domain.ViewModels.Roles
         [Required(ErrorMessage = "Уровень доступа обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Уровень доступа", Prompt = "Уровень")]
-        public int SecurityLvl { get; set; }
+        public string Description { get; set; }
     }
 }

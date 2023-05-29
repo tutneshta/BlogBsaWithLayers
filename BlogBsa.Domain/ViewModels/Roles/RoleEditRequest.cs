@@ -12,6 +12,6 @@ namespace BlogBsa.Domain.ViewModels.Roles
 
         [DataType(DataType.Text)]
         [Display(Name = "Уровень доступа", Prompt = "Уровень")]
-        public int? SecurityLvl { get; set; } = null;
+        public string? Description { get; set; } = null;
     }
 }

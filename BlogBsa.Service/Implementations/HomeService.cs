@@ -29,9 +29,9 @@ namespace BlogBsa.Service.Implementations
             var user1 = _mapper.Map<User>(userModer);
             var user2 = _mapper.Map<User>(userRole);
 
-            var roleUser = new Role() { Name = "Пользователь", SecurityLvl = 0 };
-            var moderRole = new Role() { Name = "Модератор", SecurityLvl = 1 };
-            var adminRole = new Role() { Name = "Администратор", SecurityLvl = 3 };
+            var roleUser = new Role() { Name = "Пользователь", Description = "имеет ограничения" };
+            var moderRole = new Role() { Name = "Модератор", Description = "имеет права модератора" };
+            var adminRole = new Role() { Name = "Администратор", Description = "не имеет ограничений" };
 
             await _userManager.CreateAsync(user, userAdmin.Password);
             await _userManager.CreateAsync(user1, userModer.Password);

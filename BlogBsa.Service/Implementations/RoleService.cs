@@ -19,7 +19,7 @@ namespace BlogBsa.Service.Implementations
 
         public async Task<Guid> CreateRole(RoleCreateRequest model)
         {
-            var role = new Role() { Name = model.Name, SecurityLvl = model.SecurityLvl };
+            var role = new Role() { Name = model.Name, Description = model.Description };
             await _roleManager.CreateAsync(role);
 
             return Guid.Parse(role.Id);
@@ -27,15 +27,15 @@ namespace BlogBsa.Service.Implementations
 
         public async Task EditRole(RoleEditRequest model)
         {
-            if (string.IsNullOrEmpty(model.Name) && model.SecurityLvl == null)
+            if (string.IsNullOrEmpty(model.Name) && model.Description == null)
                 return;
 
             var role = await _roleManager.FindByIdAsync(model.Id.ToString());
 
             if (!string.IsNullOrEmpty(model.Name))
                 role.Name = model.Name;
-            if (model.SecurityLvl != null)
-                role.SecurityLvl = model.SecurityLvl;
+            if (model.Description != null)
+                role.Description = model.Description;
 
             await _roleManager.UpdateAsync(role);
         }

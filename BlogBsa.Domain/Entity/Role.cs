@@ -4,6 +4,6 @@ namespace BlogBsa.Domain.Entity
 {
     public class Role : IdentityRole
     {
-        public int? SecurityLvl { get; set; } = null;
+        public string? Description { get; set; } = null;
     }
 }

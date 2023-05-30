@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using BlogBsa.DAL.Interfaces;
 using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Comments;
@@ -31,7 +32,7 @@ namespace BlogBsa.Controllers
         [Route("Comment/CreateComment")]
         public IActionResult CreateComment(Guid postId)
         {
-            var model = new CommentCreateRequest() { PostId = postId };
+            var model = new CommentCreateViewModel() { PostId = postId };
             return View(model);
         }
 
@@ -40,12 +41,15 @@ namespace BlogBsa.Controllers
         /// </summary>
         [HttpPost]
         [Route("Comment/CreateComment")]
-        public async Task<IActionResult> CreateComment(CommentCreateRequest model, Guid PostId)
+        public async Task<IActionResult> CreateComment(CommentCreateViewModel model, Guid PostId)
         {
             model.PostId = PostId;
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var post = _commentService.CreateComment(model, new Guid(user.Id));
-            return RedirectToAction("Index", "Home");
+
+            
+
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -53,9 +57,10 @@ namespace BlogBsa.Controllers
         /// </summary>
         [Route("Comment/Edit")]
         [HttpGet]
-        public IActionResult EditComment(Guid id)
+        public async Task<IActionResult> EditComment(Guid id)
         {
-            var view = new CommentEditRequest { Id = id };
+            var view = await _commentService.EditComment(id);
+
             return View(view);
         }
 
@@ -65,12 +70,12 @@ namespace BlogBsa.Controllers
         [Authorize]
         [Route("Comment/Edit")]
         [HttpPost]
-        public async Task<IActionResult> EditComment(CommentEditRequest model)
+        public async Task<IActionResult> EditComment(CommentEditViewModel model)
         {
             if (ModelState.IsValid)
             {
-                await _commentService.EditComment(model);
-                return RedirectToAction("Index", "Home");
+                await _commentService.EditComment(model, model.Id);
+                return RedirectToAction("GetPosts", "Post");
             }
             else
             {

@@ -68,7 +68,7 @@ namespace BlogBsa.Controllers
             }
 
             var postId = await _postService.CreatePost(model);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace BlogBsa.Controllers
             }
 
             await _postService.EditPost(model, Id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace BlogBsa.Controllers
         {
             if (confirm)
                 await RemovePost(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>

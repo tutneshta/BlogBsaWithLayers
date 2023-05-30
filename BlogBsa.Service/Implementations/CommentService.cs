@@ -20,7 +20,7 @@ namespace BlogBsa.Service.Implementations
             _userManager = userManager;
         }
 
-        public async Task<Guid> CreateComment(CommentCreateRequest model, Guid UserId)
+        public async Task<Guid> CreateComment(CommentCreateViewModel model, Guid UserId)
         {
             Comment comment = new Comment
             {
@@ -36,9 +36,24 @@ namespace BlogBsa.Service.Implementations
             return comment.Id;
         }
 
-        public async Task EditComment(CommentEditRequest model)
+        public async Task<CommentEditViewModel> EditComment(Guid id)
         {
-            var comment = _commentRepo.GetComment(model.Id);
+            var comment = _commentRepo.GetComment(id);
+
+            var result = new CommentEditViewModel
+            {
+                Title = comment.Title,
+                Description = comment.Body,
+                Author = comment.Author,
+            };
+           
+            return result;
+
+        }
+
+        public async Task EditComment(CommentEditViewModel model, Guid id)
+        {
+            var comment = _commentRepo.GetComment(id);
 
             comment.Title = model.Title;
             comment.Body = model.Description;

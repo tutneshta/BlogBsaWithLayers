@@ -78,14 +78,16 @@ namespace BlogBsa.Service.Implementations
 
             foreach (var tag in tags)
             {
-                foreach (var postTag in post.Tags)
+                if (tags != null)
                 {
-                    if (postTag.Id == tag.Id)
+                    foreach (var postTag in post.Tags)
                     {
+                        if (postTag.Id != tag.Id) continue;
                         tag.IsSelected = true;
                         break;
                     }
                 }
+           
             }
 
             var model = new PostEditViewModel()

@@ -2,7 +2,7 @@
 
 namespace BlogBsa.Domain.ViewModels.Comments
 {
-    public class CommentCreateRequest
+    public class CommentCreateViewModel
     {
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]
         [DataType(DataType.Text)]

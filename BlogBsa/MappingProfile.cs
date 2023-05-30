@@ -15,8 +15,8 @@ namespace BlogBsa
                 .ForMember(x => x.Email, opt => opt.MapFrom(c => c.Email))
                 .ForMember(x => x.UserName, opt => opt.MapFrom(c => c.UserName));
 
-            CreateMap<CommentCreateRequest, Comment>();
-            CreateMap<CommentEditRequest, Comment>();
+            CreateMap<CommentCreateViewModel, Comment>();
+            CreateMap<CommentEditViewModel, Comment>();
             CreateMap<PostCreateRequest, Post>();
             CreateMap<PostEditViewModel, Post>();
             CreateMap<TagCreateRequest, Tag>();

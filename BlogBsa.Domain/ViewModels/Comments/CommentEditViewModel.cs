@@ -2,7 +2,7 @@
 
 namespace BlogBsa.Domain.ViewModels.Comments
 {
-    public class CommentEditRequest
+    public class CommentEditViewModel
     {
         [DataType(DataType.Text)]
         [Display(Name = "Заголовок", Prompt = "Заголовок")]

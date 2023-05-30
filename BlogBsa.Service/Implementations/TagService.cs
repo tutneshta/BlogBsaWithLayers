@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BlogBsa.DAL.Interfaces;
 using BlogBsa.Domain.Entity;
+using BlogBsa.Domain.ViewModels.Comments;
 using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 
@@ -24,14 +25,27 @@ namespace BlogBsa.Service.Implementations
 
             return tag.Id;
         }
-
-        public async Task EditTag(TagEditRequest model)
+        public async Task<TagEditRequest> EditTag(Guid id)
         {
-            if (string.IsNullOrEmpty(model.Name))
-                return;
+            var tag = _repo.GetTag(id);
 
-            var tag = _repo.GetTag(model.Id);
+            var result = new TagEditRequest()
+            {
+                Name = tag.Name
+             
+            };
+
+            return result;
+
+        }
+
+        public async Task EditTag(TagEditRequest model, Guid id)
+        {
+            var tag = _repo.GetTag(id);
+
             tag.Name = model.Name;
+          
+
             await _repo.UpdateTag(tag);
         }
 

@@ -113,7 +113,7 @@ namespace BlogBsa.Controllers
 
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetAccounts", "Account");
             }
             else
             {
@@ -132,7 +132,7 @@ namespace BlogBsa.Controllers
         {
             if (confirm)
                 await RemoveAccount(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetAccounts", "Account");
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace BlogBsa.Controllers
         {
             await _accountService.RemoveAccount(id);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetAccounts", "Account");
         }
 
         /// <summary>

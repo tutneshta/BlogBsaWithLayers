@@ -41,7 +41,7 @@ namespace BlogBsa.Controllers
             {
                 var roleId = await _roleService.CreateRole(model);
                 _logger.LogInformation($"Созданна роль - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetRoles", "Role");
             }
             else
             {
@@ -74,7 +74,7 @@ namespace BlogBsa.Controllers
             {
                 await _roleService.EditRole(model);
                 _logger.LogDebug($"Измененна роль - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetRoles", "Role");
             }
             else
             {
@@ -93,7 +93,7 @@ namespace BlogBsa.Controllers
         {
             if (isConfirm)
                 await RemoveRole(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetRoles", "Role");
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace BlogBsa.Controllers
         {
             await _roleService.RemoveRole(id);
             _logger.LogDebug($"Удаленна роль - {id}");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetRoles", "Role");
         }
 
         /// <summary>

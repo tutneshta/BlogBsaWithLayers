@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BlogBsa.DAL.Interfaces;
 using BlogBsa.Domain.ViewModels.Tags;
+using BlogBsa.Service.Implementations;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace BlogBsa.Controllers
             {
                 var tagId = _tagService.CreateTag(model);
                 _logger.LogInformation($"Создан тег - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("GetTags", "Tag");
             }
             else
             {
@@ -59,9 +60,10 @@ namespace BlogBsa.Controllers
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public IActionResult EditTag(Guid id)
+        public async Task<IActionResult> EditTag(Guid id)
         {
-            var view = new TagEditRequest { Id = id };
+            var view = await _tagService.EditTag(id);
+
             return View(view);
         }
 
@@ -71,13 +73,12 @@ namespace BlogBsa.Controllers
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> EditTag(TagEditRequest model)
+        public async Task<IActionResult> EditTag(TagEditRequest model, Guid id)
         {
             if (ModelState.IsValid)
             {
-                await _tagService.EditTag(model);
-                _logger.LogDebug($"Изменен тег - {model.Name}");
-                return RedirectToAction("Index", "Home");
+                await _tagService.EditTag(model, model.Id);
+                return RedirectToAction("GetTags", "Tag");
             }
             else
             {
@@ -96,7 +97,7 @@ namespace BlogBsa.Controllers
         {
             if (isConfirm)
                 await RemoveTag(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetTags", "Tag");
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace BlogBsa.Controllers
         {
             await _tagService.RemoveTag(id);
             _logger.LogDebug($"Удаленн тег - {id}");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetTags", "Tag");
         }
 
         /// <summary>

@@ -9,6 +9,21 @@ using BlogBsa.Service.Implementations;
 using BlogBsa.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
+//IServiceCollection AddTransient(WebApplicationBuilder webApplicationBuilder, IMapper mapper1)
+//{
+//    return webApplicationBuilder.Services
+//        .AddSingleton(mapper1)
+//        .AddTransient<ICommentRepository, CommentRepository>()
+//        .AddTransient<ITagRepository, TagRepository>()
+//        .AddTransient<IPostRepository, PostRepository>()
+//        .AddTransient<IAccountService, AccountService>()
+//        .AddTransient<ICommentService, CommentService>()
+//        .AddTransient<IHomeService, HomeService>()
+//        .AddTransient<IPostService, PostService>()
+//        .AddTransient<ITagService, TagService>()
+//        .AddTransient<IRoleService, RoleService>();
+//}
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
@@ -35,17 +50,8 @@ builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(con
 
 
 // Services AddSingletons/Transient
-builder.Services
-    .AddSingleton(mapper)
-    .AddTransient<ICommentRepository, CommentRepository>()
-    .AddTransient<ITagRepository, TagRepository>()
-    .AddTransient<IPostRepository, PostRepository>()
-    .AddTransient<IAccountService, AccountService>()
-    .AddTransient<ICommentService, CommentService>()
-    .AddTransient<IHomeService, HomeService>()
-    .AddTransient<IPostService, PostService>()
-    .AddTransient<ITagService, TagService>()
-    .AddTransient<IRoleService, RoleService>();
+//AddTransient(builder, mapper);
+Addiction.AddAddiction(builder, mapper);
 
 // Connect logger
 builder.Logging

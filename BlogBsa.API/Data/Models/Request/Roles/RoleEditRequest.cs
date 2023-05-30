@@ -11,7 +11,7 @@ namespace BlogBsa.API.Data.Models.Request.Roles
         public string Name { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Уровень доступа", Prompt = "Уровень")]
-        public int? SecurityLvl { get; set; } = null;
+        [Display(Name = "Описание роли", Prompt = "Описание")]
+        public string? Description { get; set; } = null;
     }
 }

@@ -11,7 +11,7 @@ namespace BlogBsa.Domain.ViewModels.Roles
         public string Name { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Уровень доступа", Prompt = "Уровень")]
+        [Display(Name = "Описание роли", Prompt = "Описание")]
         public string? Description { get; set; } = null;
     }
 }

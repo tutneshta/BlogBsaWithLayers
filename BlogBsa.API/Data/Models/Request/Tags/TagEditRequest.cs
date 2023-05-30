@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogBsa.Domain.ViewModels.Tags
+namespace BlogBsa.API.Data.Models.Request.Tags
 {
-    public class TagCreateRequest
+    public class TagEditRequest
     {
-        [Required(ErrorMessage = "Поле Название обязательно для заполнения")]
+        public Guid Id { get; set; }
+
         [DataType(DataType.Text)]
         [Display(Name = "Название", Prompt = "Название")]
         public string Name { get; set; }

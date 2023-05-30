@@ -56,7 +56,7 @@ namespace BlogBsa.Controllers
         [Route("Post/Create")]
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreatePost(PostCreateRequest model)
+        public async Task<IActionResult> CreatePost(PostCreateViewModel model)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             model.AuthorId = user.Id;

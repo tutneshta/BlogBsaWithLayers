@@ -1,17 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogBsa.Domain.ViewModels.Roles
+namespace BlogBsa.Domain.ViewModels.Tags
 {
-    public class RoleEditRequest
+    public class TagEditViewModel
     {
         public Guid Id { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Название", Prompt = "Название")]
         public string Name { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Уровень доступа", Prompt = "Уровень")]
-        public string? Description { get; set; } = null;
     }
 }

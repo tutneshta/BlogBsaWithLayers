@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BlogBsa.Domain.ViewModels.Posts
 {
-    public class PostCreateRequest
+    public class PostCreateViewModel
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string AuthorId { get; set; }
-        public List<TagRequest> Tags { get; set; }
+        public List<TagViewModel> Tags { get; set; }
 
 
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]

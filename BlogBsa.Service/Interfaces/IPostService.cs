@@ -5,8 +5,8 @@ namespace BlogBsa.Service.Interfaces
 {
     public interface IPostService
     {
-        Task<PostCreateRequest> CreatePost();
-        Task<Guid> CreatePost(PostCreateRequest model);
+        Task<PostCreateViewModel> CreatePost();
+        Task<Guid> CreatePost(PostCreateViewModel model);
         Task<PostEditViewModel> EditPost(Guid Id);
         Task EditPost(PostEditViewModel model, Guid Id);
         Task RemovePost(Guid id);

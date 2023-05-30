@@ -107,7 +107,7 @@ namespace BlogBsa.Controllers
         [Route("Account/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> EditAccount(UserEditRequest model)
+        public async Task<IActionResult> EditAccount(UserEditViewModel model)
         {
             var result = await _accountService.EditAccount(model);
 

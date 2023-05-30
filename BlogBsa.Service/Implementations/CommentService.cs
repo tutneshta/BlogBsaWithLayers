@@ -10,8 +10,8 @@ namespace BlogBsa.Service.Implementations
     public class CommentService : ICommentService
     {
         public IMapper _mapper;
-        private ICommentRepository _commentRepo;
-        private UserManager<User> _userManager;
+        private readonly ICommentRepository _commentRepo;
+        private readonly UserManager<User> _userManager;
 
         public CommentService(IMapper mapper, ICommentRepository commentRepo, UserManager<User> userManager)
         {

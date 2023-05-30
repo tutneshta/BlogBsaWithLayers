@@ -5,10 +5,10 @@ namespace BlogBsa.Service.Interfaces
 {
     public interface ITagService
     {
-        Task<Guid> CreateTag(TagCreateRequest model);
-        //Task EditTag(TagEditRequest model);
-        Task<TagEditRequest> EditTag(Guid id);
-        Task EditTag(TagEditRequest model, Guid id);
+        Task<Guid> CreateTag(TagCreateViewModel model);
+        //Task EditTag(TagEditViewModel model);
+        Task<TagEditViewModel> EditTag(Guid id);
+        Task EditTag(TagEditViewModel model, Guid id);
         Task RemoveTag(Guid id);
         Task<List<Tag>> GetTags();
     }

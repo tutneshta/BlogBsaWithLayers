@@ -2,13 +2,13 @@
 
 namespace BlogBsa.Domain.ViewModels
 {
-    public class MainRequest
+    public class MainViewModel
     {
         public UserRegisterViewModel RegisterView { get; set; }
 
         public UserLoginViewModel LoginView { get; set; }
 
-        public MainRequest()
+        public MainViewModel()
         {
             RegisterView = new UserRegisterViewModel();
             LoginView = new UserLoginViewModel();

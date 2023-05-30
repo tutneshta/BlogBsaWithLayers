@@ -57,13 +57,13 @@ namespace BlogBsa.Service.Implementations
             return result;
         }
 
-        public async Task<UserEditRequest> EditAccount(Guid id)
+        public async Task<UserEditViewModel> EditAccount(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 
             var allRolesName = _roleManager.Roles.ToList();
 
-            UserEditRequest model = new UserEditRequest
+            UserEditViewModel model = new UserEditViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -71,13 +71,13 @@ namespace BlogBsa.Service.Implementations
                 Email = user.Email,
                 NewPassword = string.Empty,
                 Id = id,
-                Roles = allRolesName.Select(r => new RoleRequest() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
+                Roles = allRolesName.Select(r => new RoleViewModel() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
             };
 
             return model;
         }
 
-        public async Task<IdentityResult> EditAccount(UserEditRequest model)
+        public async Task<IdentityResult> EditAccount(UserEditViewModel model)
         {
             var user = await _userManager.FindByIdAsync(model.Id.ToString());
 

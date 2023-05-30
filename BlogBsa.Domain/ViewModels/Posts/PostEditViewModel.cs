@@ -16,6 +16,6 @@ namespace BlogBsa.Domain.ViewModels.Posts
         public string? Body { get; set; }
 
         [Display(Name = "Теги", Prompt = "Теги")]
-        public List<TagRequest>? Tags { get; set; }
+        public List<TagViewModel>? Tags { get; set; }
     }
 }

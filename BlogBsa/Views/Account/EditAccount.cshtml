@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model BlogBsa.Domain.ViewModels.Users.UserEditRequest
+@model BlogBsa.Domain.ViewModels.Users.UserEditViewModel
 
 <div class="container-page">
     <h2 class="title-margin">Редактирование пользователя</h2>
@@ -57,7 +57,7 @@
             <input class="btn btn-sm btn-primary" type="submit" value="Сохранить"/>
         </div>
         <p>
-            <a method="get" asp-controller="Account" asp-action="GetAccounts">Перейти к списку всех пользователей </a>
+            <a method="get" asp-controller="Account" asp-action="GetAccounts">Все пользователи </a>
         </p></div>
     </form>
 </div>

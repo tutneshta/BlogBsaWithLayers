@@ -2,7 +2,7 @@
 
 namespace BlogBsa.Domain.ViewModels.Roles
 {
-    public class RoleRequest
+    public class RoleViewModel
     {
         public Guid Id { get; set; }
 

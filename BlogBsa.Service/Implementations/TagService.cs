@@ -18,18 +18,18 @@ namespace BlogBsa.Service.Implementations
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateTag(TagCreateRequest model)
+        public async Task<Guid> CreateTag(TagCreateViewModel model)
         {
             var tag = _mapper.Map<Tag>(model);
             await _repo.AddTag(tag);
 
             return tag.Id;
         }
-        public async Task<TagEditRequest> EditTag(Guid id)
+        public async Task<TagEditViewModel> EditTag(Guid id)
         {
             var tag = _repo.GetTag(id);
 
-            var result = new TagEditRequest()
+            var result = new TagEditViewModel()
             {
                 Name = tag.Name
              
@@ -39,7 +39,7 @@ namespace BlogBsa.Service.Implementations
 
         }
 
-        public async Task EditTag(TagEditRequest model, Guid id)
+        public async Task EditTag(TagEditViewModel model, Guid id)
         {
             var tag = _repo.GetTag(id);
 

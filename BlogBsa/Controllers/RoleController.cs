@@ -35,7 +35,7 @@ namespace BlogBsa.Controllers
         [Route("Role/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> CreateRole(RoleCreateRequest model)
+        public async Task<IActionResult> CreateRole(RoleCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace BlogBsa.Controllers
         [HttpGet]
         public IActionResult EditRole(Guid id)
         {
-            var view = new RoleEditRequest { Id = id };
+            var view = new RoleEditViewModel { Id = id };
             return View(view);
         }
 
@@ -68,7 +68,7 @@ namespace BlogBsa.Controllers
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> EditRole(RoleEditRequest model)
+        public async Task<IActionResult> EditRole(RoleEditViewModel model)
         {
             if (ModelState.IsValid)
             {

@@ -39,7 +39,7 @@ namespace BlogBsa.Controllers
         [Route("Tag/Create")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> CreateTag(TagCreateRequest model)
+        public async Task<IActionResult> CreateTag(TagCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace BlogBsa.Controllers
         [Route("Tag/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpPost]
-        public async Task<IActionResult> EditTag(TagEditRequest model, Guid id)
+        public async Task<IActionResult> EditTag(TagEditViewModel model, Guid id)
         {
             if (ModelState.IsValid)
             {

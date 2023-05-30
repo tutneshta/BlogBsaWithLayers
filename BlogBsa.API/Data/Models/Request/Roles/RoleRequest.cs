@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogBsa.Domain.ViewModels.Tags
+namespace BlogBsa.API.Data.Models.Request.Roles
 {
-    public class TagRequest
+    public class RoleRequest
     {
         public Guid Id { get; set; }
 

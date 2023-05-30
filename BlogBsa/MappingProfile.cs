@@ -17,11 +17,11 @@ namespace BlogBsa
 
             CreateMap<CommentCreateViewModel, Comment>();
             CreateMap<CommentEditViewModel, Comment>();
-            CreateMap<PostCreateRequest, Post>();
+            CreateMap<PostCreateViewModel, Post>();
             CreateMap<PostEditViewModel, Post>();
-            CreateMap<TagCreateRequest, Tag>();
-            CreateMap<TagEditRequest, Tag>();
-            CreateMap<UserEditRequest, User>();
+            CreateMap<TagCreateViewModel, Tag>();
+            CreateMap<TagEditViewModel, Tag>();
+            CreateMap<UserEditViewModel, User>();
         }
     }
 }

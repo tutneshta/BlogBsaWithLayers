@@ -25,13 +25,13 @@ namespace BlogBsa.Service.Implementations
             _commentRepo = commentRepo;
         }
 
-        public async Task<PostCreateRequest> CreatePost()
+        public async Task<PostCreateViewModel> CreatePost()
         {
             Post post = new Post();
 
-            var allTags = _tagRepo.GetAllTags().Select(t => new TagRequest() { Id = t.Id, Name = t.Name }).ToList();
+            var allTags = _tagRepo.GetAllTags().Select(t => new TagViewModel() { Id = t.Id, Name = t.Name }).ToList();
 
-            PostCreateRequest model = new PostCreateRequest
+            PostCreateViewModel model = new PostCreateViewModel
             {
                 Title = post.Title = string.Empty,
                 Body = post.Body = string.Empty,
@@ -41,7 +41,7 @@ namespace BlogBsa.Service.Implementations
             return model;
         }
 
-        public async Task<Guid> CreatePost(PostCreateRequest model)
+        public async Task<Guid> CreatePost(PostCreateViewModel model)
         {
             var dbTags = new List<Tag>();
 
@@ -52,7 +52,7 @@ namespace BlogBsa.Service.Implementations
                 dbTags = _tagRepo.GetAllTags().Where(t => tagsId.Contains(t.Id)).ToList();
             }
 
-            Post post = new Post
+            var post = new Post
             {
                 Id = model.Id,
                 Title = model.Title,
@@ -74,7 +74,7 @@ namespace BlogBsa.Service.Implementations
         {
             var post = _repo.GetPost(id);
 
-            var tags = _tagRepo.GetAllTags().Select(t => new TagRequest() { Id = t.Id, Name = t.Name }).ToList();
+            var tags = _tagRepo.GetAllTags().Select(t => new TagViewModel() { Id = t.Id, Name = t.Name }).ToList();
 
             foreach (var tag in tags)
             {

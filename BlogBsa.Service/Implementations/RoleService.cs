@@ -17,7 +17,7 @@ namespace BlogBsa.Service.Implementations
             _mapper = mapper;
         }
 
-        public async Task<Guid> CreateRole(RoleCreateRequest model)
+        public async Task<Guid> CreateRole(RoleCreateViewModel model)
         {
             var role = new Role() { Name = model.Name, Description = model.Description };
             await _roleManager.CreateAsync(role);
@@ -25,7 +25,7 @@ namespace BlogBsa.Service.Implementations
             return Guid.Parse(role.Id);
         }
 
-        public async Task EditRole(RoleEditRequest model)
+        public async Task EditRole(RoleEditViewModel model)
         {
             if (string.IsNullOrEmpty(model.Name) && model.Description == null)
                 return;

@@ -2,7 +2,7 @@
 
 namespace BlogBsa.Domain.ViewModels.Roles
 {
-    public class RoleCreateRequest
+    public class RoleCreateViewModel
     {
         [Required(ErrorMessage = "Поле Название обязательно для заполнения")]
         [DataType(DataType.Text)]

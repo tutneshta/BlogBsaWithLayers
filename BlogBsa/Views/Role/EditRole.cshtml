@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
-@model BlogBsa.Domain.ViewModels.Roles.RoleEditRequest
+@model BlogBsa.Domain.ViewModels.Roles.RoleEditViewModel
 
 <div class="container-page">
     <h2 class="title-margin">Редактирование тега</h2>
@@ -10,7 +10,8 @@
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div style="margin-bottom: 5px">
-            <label asp-for="Description"></label><br />
+            @*<label asp-for="Description"></label><br />*@
+            Описание
             <input class="form-control" asp-for="Description" />
             <span asp-validation-for="Description" class="text-danger"></span>
             <input class="form-control" asp-for="Id" hidden/>

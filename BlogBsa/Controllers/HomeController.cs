@@ -35,7 +35,7 @@ namespace BlogBsa.Controllers
             //Console.WriteLine(5 / (i - 1));
 
 
-            return View(new MainRequest());
+            return View(new MainViewModel());
         }
 
         [Authorize]

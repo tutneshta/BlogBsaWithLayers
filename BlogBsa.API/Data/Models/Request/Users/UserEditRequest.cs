@@ -1,10 +1,12 @@
-﻿using BlogBsa.Domain.ViewModels.Roles;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BlogBsa.Domain.ViewModels.Users
+namespace BlogBsa.API.Data.Models.Request.Users
 {
     public class UserEditRequest
     {
+        [Required]
+        public Guid Id { get; set; }
+
         [DataType(DataType.Text)]
         [Display(Name = "Имя", Prompt = "Имя")]
         public string? FirstName { get; set; }
@@ -24,11 +26,6 @@ namespace BlogBsa.Domain.ViewModels.Users
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
         public string? NewPassword { get; set; }
-
-        [Display(Name = "Роли")]
-        public List<RoleRequest> Roles { get; set; }
-
-        public Guid Id { get; set; }
 
     }
 }

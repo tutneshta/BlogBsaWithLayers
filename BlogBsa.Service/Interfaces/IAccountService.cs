@@ -8,8 +8,8 @@ namespace BlogBsa.Service.Interfaces
     {
         Task<IdentityResult> Register(UserRegisterViewModel model);
         Task<SignInResult> Login(UserLoginViewModel model);
-        Task<IdentityResult> EditAccount(UserEditRequest model);
-        Task<UserEditRequest> EditAccount(Guid id);
+        Task<IdentityResult> EditAccount(UserEditViewModel model);
+        Task<UserEditViewModel> EditAccount(Guid id);
         Task RemoveAccount(Guid id);
         Task<List<User>> GetAccounts();
         Task LogoutAccount();

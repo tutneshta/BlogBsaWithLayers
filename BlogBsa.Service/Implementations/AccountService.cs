@@ -50,6 +50,7 @@ namespace BlogBsa.Service.Implementations
             }
         }
 
+
         public async Task<SignInResult> Login(UserLoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -156,6 +157,33 @@ namespace BlogBsa.Service.Implementations
             await _signInManager.SignOutAsync();
         }
 
+        public async Task<IdentityResult> CreateUser(UserCreateViewModel model)
+        {
+            var user = new User();
+
+            if (model.FirstName != null)
+            {
+                user.FirstName = model.FirstName;
+            }
+            if (model.LastName != null)
+            {
+                user.LastName = model.LastName;
+            }
+            if (model.Email != null)
+            {
+                user.Email = model.Email;
+            }
+            if (model.UserName != null)
+            {
+                user.UserName = model.UserName;
+            }
+
+
+            var roleUser = new Role() { Name = "Пользователь", Description = "имеет ограничения" };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            await _userManager.AddToRoleAsync(user, roleUser.Name);
+            return result;
+        }
 
     }
 }

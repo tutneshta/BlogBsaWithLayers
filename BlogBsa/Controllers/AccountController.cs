@@ -54,6 +54,43 @@ namespace BlogBsa.Controllers
         }
 
         /// <summary>
+        /// [Get] Метод, создания пользователя
+        /// </summary>
+        [Route("Account/Create")]
+        [HttpGet]
+        public IActionResult AddUser()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// [Post] Метод, создания пользователя
+        /// </summary>
+        [Route("Account/Create")]
+        [HttpPost]
+        public async Task<IActionResult> AddUser(UserCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountService.CreateUser(model);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("GetAccounts", "Account");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        /// <summary>
         /// [Get] Метод, регистрации
         /// </summary>
         [Route("Account/Register")]
@@ -62,6 +99,7 @@ namespace BlogBsa.Controllers
         {
             return View();
         }
+
 
         /// <summary>
         /// [Post] Метод, регистрации

@@ -124,5 +124,11 @@ namespace BlogBsa.Controllers
             var tags = await _tagService.GetTags();
             return View(tags);
         }
+
+        public async Task<IActionResult> DetailsTag(Guid id)
+        {
+            var tags = await _tagService.GetTag(id);
+            return View(tags);
+        }
     }
 }

@@ -9,9 +9,9 @@ namespace BlogBsa.Domain.ViewModels.Roles
         [Display(Name = "Название", Prompt = "Название")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Уровень доступа обязательно для заполнения")]
+        [Required(ErrorMessage = "Описание обязательно для заполнения")]
         [DataType(DataType.Text)]
-        [Display(Name = "Уровень доступа", Prompt = "Уровень")]
+        [Display(Name = "Описание роли", Prompt = "Описание")]
         public string Description { get; set; }
     }
 }

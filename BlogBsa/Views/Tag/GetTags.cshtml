@@ -20,6 +20,7 @@
                               {
                                 <div>
                                     <a class="btn btn-outline-info button" method="get" asp-controller="Tag" asp-action="EditTag" asp-route-id="@tag.Id">Редактировать</a>
+                                    <a class="btn btn-outline-secondary" method="get" asp-controller="Tag" asp-action="DetailsTag" asp-route-id="@tag.Id">Просмотреть</a>
                                     <a class="btn btn-outline-danger button" method="post" asp-controller="Tag" asp-action="RemoveTag" asp-route-id="@tag.Id">Удалить</a>
                                 </div>
                               }

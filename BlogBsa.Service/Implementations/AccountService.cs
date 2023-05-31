@@ -36,7 +36,7 @@ namespace BlogBsa.Service.Implementations
             {
                 await _signInManager.SignInAsync(user, false);
 
-                var userRole = new Role() { Name = "Пользователь", Description = null };
+                var userRole = new Role() { Name = "Пользователь", Description = "Имеет ограниченные права" };
                 await _roleManager.CreateAsync(userRole);
 
                 var currentUser = await _userManager.FindByIdAsync(Convert.ToString(user.Id));
@@ -145,9 +145,17 @@ namespace BlogBsa.Service.Implementations
             return accounts;
         }
 
+        public async Task<User> GetAccount(Guid id)
+        {
+
+                return await _userManager.FindByIdAsync(id.ToString());
+        }
+
         public async Task LogoutAccount()
         {
             await _signInManager.SignOutAsync();
         }
+
+
     }
 }

@@ -12,6 +12,7 @@ namespace BlogBsa.Service.Interfaces
         Task<UserEditViewModel> EditAccount(Guid id);
         Task RemoveAccount(Guid id);
         Task<List<User>> GetAccounts();
+        Task<User> GetAccount(Guid id);
         Task LogoutAccount();
     }
 }

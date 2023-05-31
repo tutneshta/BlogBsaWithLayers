@@ -28,6 +28,7 @@
                       {
                         <div>
                             <a class="btn btn-outline-info button" method="get" asp-controller="Account" asp-action="EditAccount" asp-route-id="@user.Id">Редактировать</a>
+                            <a class="btn btn-outline-secondary" method="get" asp-controller="Account" asp-action="DetailsAccount" asp-route-id="@user.Id">Просмотреть</a>
                             <a class="btn btn-outline-danger button" method="post" asp-controller="Account" asp-action="RemoveAccount" asp-route-id="@user.Id">Удалить</a>
                         </div>
                       }

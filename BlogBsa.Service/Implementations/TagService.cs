@@ -58,5 +58,10 @@ namespace BlogBsa.Service.Implementations
         {
             return _repo.GetAllTags().ToList();
         }
+
+        public async Task<Tag> GetTag(Guid id)
+        {
+            return _repo.GetTag(id);
+        }
     }
 }

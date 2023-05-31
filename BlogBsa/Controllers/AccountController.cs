@@ -172,5 +172,17 @@ namespace BlogBsa.Controllers
 
             return View(users);
         }
+
+        /// <summary>
+        /// [Get] Метод, просмотра
+        /// </summary>
+        [Route("Account/Details")]
+       
+        [HttpGet]
+        public async Task<IActionResult> DetailsAccount(Guid id)
+        {
+            var model = await _accountService.GetAccount(id);
+            return View(model);
+        }
     }
 }

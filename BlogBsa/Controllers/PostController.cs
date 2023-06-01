@@ -118,6 +118,7 @@ namespace BlogBsa.Controllers
         /// </summary>
         [HttpPost]
         [Route("Post/Remove")]
+        [Authorize(Roles = "Администратор, Модератор")]
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);

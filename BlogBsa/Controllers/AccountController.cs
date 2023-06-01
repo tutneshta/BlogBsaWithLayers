@@ -215,7 +215,8 @@ namespace BlogBsa.Controllers
         /// [Get] Метод, просмотра
         /// </summary>
         [Route("Account/Details")]
-       
+        [Authorize(Roles = "Администратор, Модератор")]
+
         [HttpGet]
         public async Task<IActionResult> DetailsAccount(Guid id)
         {

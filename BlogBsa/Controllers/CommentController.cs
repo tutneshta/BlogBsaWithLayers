@@ -89,6 +89,7 @@ namespace BlogBsa.Controllers
         /// </summary>
         [HttpGet]
         [Route("Comment/Remove")]
+        [Authorize(Roles = "Администратор, Модератор")]
         public async Task<IActionResult> RemoveComment(Guid id, bool confirm = true)
         {
             if (confirm)

@@ -56,9 +56,11 @@ namespace BlogBsa.Controllers
         [Route("Role/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
         [HttpGet]
-        public IActionResult EditRole(Guid id)
+        public async Task<IActionResult> EditRole(Guid id)
         {
-            var view = new RoleEditViewModel { Id = id };
+            var role = _roleService.GetRole(id);
+            var view = new RoleEditViewModel { Id = id, Description = role.Result?.Description, Name = role.Result?.Name};
+           
             return View(view);
         }
 

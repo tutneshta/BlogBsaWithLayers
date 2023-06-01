@@ -6,7 +6,7 @@
     <form method="post" asp-controller="Post" asp-action="EditPost"> <div asp-validation-summary="All" class="text-danger"></div>
         <div style="margin-bottom: 5px">
             <table>
-			<label>Роли</label>
+			<label>Теги</label>
             @if (Model is not null)
             {
                 @for (int i = 0; i < Model.Tags.Count; i++)

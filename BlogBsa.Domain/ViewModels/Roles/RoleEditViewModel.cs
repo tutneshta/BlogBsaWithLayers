@@ -8,7 +8,7 @@ namespace BlogBsa.Domain.ViewModels.Roles
 
         [DataType(DataType.Text)]
         [Display(Name = "Название", Prompt = "Название")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Описание роли", Prompt = "описание")]

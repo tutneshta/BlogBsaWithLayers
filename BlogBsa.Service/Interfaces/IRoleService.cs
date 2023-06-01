@@ -9,5 +9,6 @@ namespace BlogBsa.Service.Interfaces
         Task EditRole(RoleEditViewModel model);
         Task RemoveRole(Guid id);
         Task<List<Role>> GetRoles();
+        Task<Role?> GetRole(Guid id);
     }
 }

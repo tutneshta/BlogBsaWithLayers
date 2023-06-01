@@ -50,5 +50,10 @@ namespace BlogBsa.Service.Implementations
         {
             return _roleManager.Roles.ToList();
         }
+
+        public  async Task<Role?> GetRole(Guid id)
+        {
+            return await _roleManager.FindByIdAsync(id.ToString());
+        }
     }
 }

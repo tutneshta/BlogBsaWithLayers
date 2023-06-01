@@ -31,10 +31,6 @@ namespace BlogBsa.Controllers
         {
             await _homeService.GenerateData();
 
-            //int i = 1;
-            //Console.WriteLine(5 / (i - 1));
-
-
             return View(new MainViewModel());
         }
 

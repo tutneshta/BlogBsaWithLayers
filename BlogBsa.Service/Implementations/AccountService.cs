@@ -50,7 +50,6 @@ namespace BlogBsa.Service.Implementations
             }
         }
 
-
         public async Task<SignInResult> Login(UserLoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -178,10 +177,12 @@ namespace BlogBsa.Service.Implementations
                 user.UserName = model.UserName;
             }
 
-
             var roleUser = new Role() { Name = "Пользователь", Description = "имеет ограничения" };
+
             var result = await _userManager.CreateAsync(user, model.Password);
+
             await _userManager.AddToRoleAsync(user, roleUser.Name);
+
             return result;
         }
 

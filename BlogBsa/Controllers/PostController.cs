@@ -11,17 +11,11 @@ namespace BlogBsa.Controllers
 {
     public class PostController : Controller
     {
-        private readonly IPostRepository _repo;
         private readonly IPostService _postService;
-        private readonly ITagRepository _tagRepo;
         private readonly UserManager<User> _userManager;
-        private IMapper _mapper;
 
-        public PostController(ITagRepository tagRepository, IPostRepository repo, IMapper mapper, IPostService postService, UserManager<User> userManager)
+        public PostController(IPostService postService, UserManager<User> userManager)
         {
-            _tagRepo = tagRepository;
-            _repo = repo;
-            _mapper = mapper;
             _postService = postService;
             _userManager = userManager;
         }
@@ -34,6 +28,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> ShowPost(Guid id)
         {
             var post = await _postService.ShowPost(id);
+
             return View(post);
         }
 
@@ -59,15 +54,18 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> CreatePost(PostCreateViewModel model)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
             model.AuthorId = user.Id;
 
             if (string.IsNullOrEmpty(model.Title) || string.IsNullOrEmpty(model.Body))
             {
                 ModelState.AddModelError("", "Не все поля заполненны");
+
                 return View(model);
             }
 
             var postId = await _postService.CreatePost(model);
+
             return RedirectToAction("GetPosts", "Post");
         }
 
@@ -94,10 +92,12 @@ namespace BlogBsa.Controllers
             if (string.IsNullOrEmpty(model.Title) || string.IsNullOrEmpty(model.Body))
             {
                 ModelState.AddModelError("", "Не все поля заполненны");
+
                 return View(model);
             }
 
             await _postService.EditPost(model, Id);
+
             return RedirectToAction("GetPosts", "Post");
         }
 
@@ -109,7 +109,9 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemovePost(Guid id, bool confirm = true)
         {
             if (confirm)
+
                 await RemovePost(id);
+
             return RedirectToAction("GetPosts", "Post");
         }
 
@@ -122,6 +124,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
+
             return RedirectToAction("GetPosts", "Post");
         }
 

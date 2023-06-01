@@ -10,19 +10,11 @@ namespace BlogBsa.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<Role> _roleManager;
         private readonly IAccountService _accountService;
-        private readonly IMapper _mapper;
 
-
-        public AccountController(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager, IAccountService accountService)
+        public AccountController(IAccountService accountService)
         {
-            _roleManager = roleManager;
-            _mapper = mapper;
-            _userManager = userManager;
-            _signInManager = signInManager;
+
             _accountService = accountService;
 
         }
@@ -63,7 +55,6 @@ namespace BlogBsa.Controllers
             return View();
         }
 
-
         /// <summary>
         /// [Post] Метод, создания пользователя
         /// </summary>
@@ -99,7 +90,6 @@ namespace BlogBsa.Controllers
         {
             return View();
         }
-
 
         /// <summary>
         /// [Post] Метод, регистрации

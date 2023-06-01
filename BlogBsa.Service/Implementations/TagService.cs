@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BlogBsa.DAL.Interfaces;
 using BlogBsa.Domain.Entity;
-using BlogBsa.Domain.ViewModels.Comments;
 using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 

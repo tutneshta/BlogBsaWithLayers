@@ -9,7 +9,6 @@ namespace BlogBsa.Domain.ViewModels.Posts
         public string AuthorId { get; set; }
         public List<TagViewModel> Tags { get; set; }
 
-
         [Required(ErrorMessage = "Поле Заголовок обязательно для заполнения")]
         [DataType(DataType.Text)]
         [Display(Name = "Заголовок", Prompt = "Заголовок")]

@@ -51,6 +51,7 @@ namespace BlogBsa.DAL.Repositories
             {
                 return true;
             }
+
             return false;
         }
     }

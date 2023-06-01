@@ -40,12 +40,15 @@ namespace BlogBsa.Controllers
             if (ModelState.IsValid)
             {
                 var roleId = await _roleService.CreateRole(model);
+
                 _logger.LogInformation($"Созданна роль - {model.Name}");
+
                 return RedirectToAction("GetRoles", "Role");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
                 return View(model);
             }
         }
@@ -59,6 +62,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> EditRole(Guid id)
         {
             var role = _roleService.GetRole(id);
+
             var view = new RoleEditViewModel { Id = id, Description = role.Result?.Description, Name = role.Result?.Name};
            
             return View(view);
@@ -75,12 +79,15 @@ namespace BlogBsa.Controllers
             if (ModelState.IsValid)
             {
                 await _roleService.EditRole(model);
+
                 _logger.LogDebug($"Измененна роль - {model.Name}");
+
                 return RedirectToAction("GetRoles", "Role");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
                 return View(model);
             }
         }
@@ -94,7 +101,9 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveRole(Guid id, bool isConfirm = true)
         {
             if (isConfirm)
+
                 await RemoveRole(id);
+
             return RedirectToAction("GetRoles", "Role");
         }
 
@@ -107,7 +116,9 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveRole(Guid id)
         {
             await _roleService.RemoveRole(id);
+
             _logger.LogDebug($"Удаленна роль - {id}");
+
             return RedirectToAction("GetRoles", "Role");
         }
 
@@ -120,6 +131,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> GetRoles()
         {
             var roles = await _roleService.GetRoles();
+
             return View(roles);
         }
     }

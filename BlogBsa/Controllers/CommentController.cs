@@ -12,15 +12,11 @@ namespace BlogBsa.Controllers
 {
     public class CommentController : Controller
     {
-        private IMapper _mapper;
-        private ICommentRepository _commentRepo;
-        private ICommentService _commentService;
+        private readonly ICommentService _commentService;
         private readonly UserManager<User> _userManager;
 
-        public CommentController(IMapper mapper, ICommentRepository commentRepo, ICommentService commentService, UserManager<User> userManager)
+        public CommentController(ICommentService commentService, UserManager<User> userManager)
         {
-            _mapper = mapper;
-            _commentRepo = commentRepo;
             _commentService = commentService;
             _userManager = userManager;
         }
@@ -33,6 +29,7 @@ namespace BlogBsa.Controllers
         public IActionResult CreateComment(Guid postId)
         {
             var model = new CommentCreateViewModel() { PostId = postId };
+
             return View(model);
         }
 
@@ -44,10 +41,10 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> CreateComment(CommentCreateViewModel model, Guid PostId)
         {
             model.PostId = PostId;
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var post = _commentService.CreateComment(model, new Guid(user.Id));
 
-            
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var post = _commentService.CreateComment(model, new Guid(user.Id));
 
             return RedirectToAction("GetPosts", "Post");
         }
@@ -75,11 +72,13 @@ namespace BlogBsa.Controllers
             if (ModelState.IsValid)
             {
                 await _commentService.EditComment(model, model.Id);
+
                 return RedirectToAction("GetPosts", "Post");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
                 return View(model);
             }
         }
@@ -93,7 +92,9 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveComment(Guid id, bool confirm = true)
         {
             if (confirm)
+
                 await RemoveComment(id);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -105,6 +106,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveComment(Guid id)
         {
             await _commentService.RemoveComment(id);
+
             return RedirectToAction("Index", "Home");
         }
     }

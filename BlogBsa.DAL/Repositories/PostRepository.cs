@@ -46,7 +46,5 @@ namespace BlogBsa.DAL.Repositories
         {
             return await _context.SaveChangesAsync() > 0;
         }
-
-
     }
 }

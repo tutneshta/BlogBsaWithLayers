@@ -9,11 +9,9 @@ namespace BlogBsa
     public static class Addiction
     {
         public static void AddAddiction(WebApplicationBuilder builder, IMapper mapper1)
-        {
-
-         builder.Services
+        { 
+            builder.Services
         .AddSingleton(mapper1)
-
         .AddTransient<ICommentRepository, CommentRepository>()
         .AddTransient<ITagRepository, TagRepository>()
         .AddTransient<IPostRepository, PostRepository>()

@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{75BC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlogBsa.Service", "BlogBsa.Service\BlogBsa.Service.csproj", "{648FA08A-58D3-4B5E-94FA-591DE20A687E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogBsa.API", "BlogBsa.API\BlogBsa.API.csproj", "{BC7A623A-FB98-4753-AE10-245FB8A82886}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{648FA08A-58D3-4B5E-94FA-591DE20A687E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{648FA08A-58D3-4B5E-94FA-591DE20A687E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{648FA08A-58D3-4B5E-94FA-591DE20A687E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC7A623A-FB98-4753-AE10-245FB8A82886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC7A623A-FB98-4753-AE10-245FB8A82886}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC7A623A-FB98-4753-AE10-245FB8A82886}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC7A623A-FB98-4753-AE10-245FB8A82886}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

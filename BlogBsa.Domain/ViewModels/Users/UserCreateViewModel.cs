@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BlogBsa.Domain.ViewModels.Users
 {
@@ -26,7 +25,5 @@ namespace BlogBsa.Domain.ViewModels.Users
         public string? Password { get; set; }
 
         public Guid Id { get; set; }
-
     }
 }
-

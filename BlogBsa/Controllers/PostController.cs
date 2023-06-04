@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using BlogBsa.DAL.Interfaces;
-using BlogBsa.Domain.Entity;
+﻿using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Posts;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;

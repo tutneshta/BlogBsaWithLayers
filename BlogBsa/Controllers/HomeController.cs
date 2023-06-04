@@ -37,7 +37,6 @@ namespace BlogBsa.Controllers
         [Authorize]
         public IActionResult MyPage()
         {
-
             return View();
         }
 

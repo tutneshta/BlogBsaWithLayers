@@ -147,8 +147,7 @@ namespace BlogBsa.Service.Implementations
 
         public async Task<User> GetAccount(Guid id)
         {
-
-                return await _userManager.FindByIdAsync(id.ToString());
+            return await _userManager.FindByIdAsync(id.ToString());
         }
 
         public async Task LogoutAccount()
@@ -185,6 +184,5 @@ namespace BlogBsa.Service.Implementations
 
             return result;
         }
-
     }
 }

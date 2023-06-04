@@ -87,7 +87,6 @@ namespace BlogBsa.Service.Implementations
                         break;
                     }
                 }
-           
             }
 
             var model = new PostEditViewModel()

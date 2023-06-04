@@ -9,7 +9,7 @@ namespace BlogBsa
     public static class Addiction
     {
         public static void AddAddiction(WebApplicationBuilder builder, IMapper mapper1)
-        { 
+        {
             builder.Services
         .AddSingleton(mapper1)
         .AddTransient<ICommentRepository, CommentRepository>()
@@ -21,7 +21,6 @@ namespace BlogBsa
         .AddTransient<IPostService, PostService>()
         .AddTransient<ITagService, TagService>()
         .AddTransient<IRoleService, RoleService>();
-
         }
     }
 }

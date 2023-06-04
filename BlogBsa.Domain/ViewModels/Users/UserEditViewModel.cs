@@ -29,6 +29,5 @@ namespace BlogBsa.Domain.ViewModels.Users
         public List<RoleViewModel> Roles { get; set; }
 
         public Guid Id { get; set; }
-
     }
 }

@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using BlogBsa.Domain.Entity;
-using BlogBsa.Domain.ViewModels.Users;
+﻿using BlogBsa.Domain.ViewModels.Users;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogBsa.Controllers
@@ -14,9 +11,7 @@ namespace BlogBsa.Controllers
 
         public AccountController(IAccountService accountService)
         {
-
             _accountService = accountService;
-
         }
 
         [Route("Account/Login")]
@@ -206,7 +201,6 @@ namespace BlogBsa.Controllers
         /// </summary>
         [Route("Account/Details")]
         [Authorize(Roles = "Администратор, Модератор")]
-
         [HttpGet]
         public async Task<IActionResult> DetailsAccount(Guid id)
         {

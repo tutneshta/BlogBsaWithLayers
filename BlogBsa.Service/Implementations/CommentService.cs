@@ -46,9 +46,8 @@ namespace BlogBsa.Service.Implementations
                 Description = comment.Body,
                 Author = comment.Author,
             };
-           
-            return result;
 
+            return result;
         }
 
         public async Task EditComment(CommentEditViewModel model, Guid id)

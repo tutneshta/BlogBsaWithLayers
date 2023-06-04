@@ -13,6 +13,5 @@ namespace BlogBsa.Domain.ViewModels.Users
         [DataType(DataType.Password)]
         [Display(Name = "Пароль", Prompt = "Введите пароль")]
         public string Password { get; set; }
-
     }
 }

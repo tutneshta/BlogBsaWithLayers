@@ -11,6 +11,7 @@ namespace BlogBsa.Controllers
         private readonly IRoleService _roleService;
         private readonly ILogger<RoleController> _logger;
         private IMapper _mapper;
+
         public RoleController(IMapper mapper, IRoleService roleService, ILogger<RoleController> logger)
         {
             _mapper = mapper;
@@ -63,8 +64,8 @@ namespace BlogBsa.Controllers
         {
             var role = _roleService.GetRole(id);
 
-            var view = new RoleEditViewModel { Id = id, Description = role.Result?.Description, Name = role.Result?.Name};
-           
+            var view = new RoleEditViewModel { Id = id, Description = role.Result?.Description, Name = role.Result?.Name };
+
             return View(view);
         }
 

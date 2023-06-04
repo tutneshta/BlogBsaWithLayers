@@ -24,6 +24,7 @@ namespace BlogBsa.Service.Implementations
 
             return tag.Id;
         }
+
         public async Task<TagEditViewModel> EditTag(Guid id)
         {
             var tag = _repo.GetTag(id);
@@ -31,11 +32,9 @@ namespace BlogBsa.Service.Implementations
             var result = new TagEditViewModel()
             {
                 Name = tag.Name
-             
             };
 
             return result;
-
         }
 
         public async Task EditTag(TagEditViewModel model, Guid id)
@@ -43,7 +42,6 @@ namespace BlogBsa.Service.Implementations
             var tag = _repo.GetTag(id);
 
             tag.Name = model.Name;
-          
 
             await _repo.UpdateTag(tag);
         }

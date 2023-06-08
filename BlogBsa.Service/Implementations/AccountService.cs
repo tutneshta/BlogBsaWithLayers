@@ -57,45 +57,67 @@ namespace BlogBsa.Service.Implementations
             return result;
         }
 
-        public async Task<UserEditViewModel> EditAccount(Guid id)
+        //public async Task<UserEditViewModel> EditAccount(Guid id)
+        //{
+        //    var user = await _userManager.FindByIdAsync(id.ToString());
+
+        //    //List<Role> allRolesName = _roleManager.Roles.ToList();
+        //    var allRolesName = _roleManager.Roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name })
+        //        .ToList();
+
+        //    foreach (var role in allRolesName)
+        //    {
+        //        if (allRolesName != null)
+        //        {
+        //            foreach (var userRole in user.Roles)
+        //            {
+        //                if (userRole.Id == role.Id)
+        //                {
+        //                    role.IsSelected = true;
+        //                }
+
+        //                break;
+        //            }
+        //        }
+        //    }
+
+        //    var model = new UserEditViewModel
+        //    {
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        UserName = user.UserName,
+        //        Email = user.Email,
+        //        NewPassword = string.Empty,
+        //        Id = id,
+        //        Roles = allRolesName
+        //        //Roles = allRolesName.Select(r => new RoleViewModel() { Id = new string(r.Id), Name = r.Name }).ToList(),
+        //    };
+
+        //    return model;
+        //}
+
+        public async Task<ChangeRoleViewModel> EditAccount(string id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
+            var user = await _userManager.FindByIdAsync(id);
 
-            //List<Role> allRolesName = _roleManager.Roles.ToList();
-            var allRolesName = _roleManager.Roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name })
-                .ToList();
-
-            foreach (var role in allRolesName)
+            if (user != null)
             {
-                if (allRolesName != null)
+                var userRoles = await _userManager.GetRolesAsync(user);
+                var allRoles = _roleManager.Roles.ToList();
+
+                ChangeRoleViewModel model = new ChangeRoleViewModel
                 {
-                    foreach (var userRole in user.Roles)
-                    {
-                        if (userRole.Id == role.Id)
-                        {
-                            role.IsSelected = true;
-                        }
-
-
-
-                        break;
-                    }
-                }
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    AllRoles = allRoles
+                    
+                };
+                return model;
             }
 
-            var model = new UserEditViewModel
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                UserName = user.UserName,
-                Email = user.Email,
-                NewPassword = string.Empty,
-                Id = id,
-                Roles = allRolesName
-                //Roles = allRolesName.Select(r => new RoleViewModel() { Id = new string(r.Id), Name = r.Name }).ToList(),
-            };
-
-            return model;
+            return null;
         }
 
         public async Task<IdentityResult> EditAccount(UserEditViewModel model)

@@ -22,7 +22,7 @@ namespace BlogBsa.Service.Implementations
 
         public async Task<Guid> CreateComment(CommentCreateViewModel model, Guid UserId)
         {
-            Comment comment = new Comment
+            var comment = new Comment
             {
                 Title = model.Title,
                 Body = model.Description,

@@ -27,11 +27,11 @@ namespace BlogBsa.Service.Implementations
 
         public async Task<PostCreateViewModel> CreatePost()
         {
-            Post post = new Post();
+            var post = new Post();
 
             var allTags = _tagRepo.GetAllTags().Select(t => new TagViewModel() { Id = t.Id, Name = t.Name }).ToList();
 
-            PostCreateViewModel model = new PostCreateViewModel
+            var model = new PostCreateViewModel
             {
                 Title = post.Title = string.Empty,
                 Body = post.Body = string.Empty,

@@ -61,9 +61,29 @@ namespace BlogBsa.Service.Implementations
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
 
-            var allRolesName = _roleManager.Roles.ToList();
+            //List<Role> allRolesName = _roleManager.Roles.ToList();
+            var allRolesName = _roleManager.Roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name })
+                .ToList();
 
-            UserEditViewModel model = new UserEditViewModel
+            foreach (var role in allRolesName)
+            {
+                if (allRolesName != null)
+                {
+                    foreach (var userRole in user.Roles)
+                    {
+                        if (userRole.Id == role.Id)
+                        {
+                            role.IsSelected = true;
+                        }
+
+
+
+                        break;
+                    }
+                }
+            }
+
+            var model = new UserEditViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -71,7 +91,8 @@ namespace BlogBsa.Service.Implementations
                 Email = user.Email,
                 NewPassword = string.Empty,
                 Id = id,
-                Roles = allRolesName.Select(r => new RoleViewModel() { Id = new Guid(r.Id), Name = r.Name }).ToList(),
+                Roles = allRolesName
+                //Roles = allRolesName.Select(r => new RoleViewModel() { Id = new string(r.Id), Name = r.Name }).ToList(),
             };
 
             return model;

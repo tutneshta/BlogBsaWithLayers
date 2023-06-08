@@ -26,7 +26,7 @@ namespace BlogBsa.Domain.ViewModels.Users
         public string? NewPassword { get; set; }
 
         [Display(Name = "Роли")]
-        public List<RoleViewModel> Roles { get; set; }
+        public List<RoleViewModel>? Roles { get; set; }
 
         public Guid Id { get; set; }
     }

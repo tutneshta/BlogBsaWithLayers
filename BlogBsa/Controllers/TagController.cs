@@ -4,6 +4,7 @@ using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
@@ -11,15 +12,14 @@ namespace BlogBsa.Controllers
     {
         private readonly ITagRepository _repo;
         private readonly ITagService _tagService;
-        private readonly ILogger<TagController> _logger;
         private IMapper _mapper;
+        readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public TagController(ITagRepository repo, IMapper mapper, ITagService tagService, ILogger<TagController> logger)
+        public TagController(ITagRepository repo, IMapper mapper, ITagService tagService)
         {
             _repo = repo;
             _mapper = mapper;
             _tagService = tagService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -44,12 +44,11 @@ namespace BlogBsa.Controllers
             if (ModelState.IsValid)
             {
                 var tagId = _tagService.CreateTag(model);
-                _logger.LogInformation($"Создан тег - {model.Name}");
+                _logger.Info($"создан тег - {model.Name}");
                 return RedirectToAction("GetTags", "Tag");
             }
             else
             {
-                ModelState.AddModelError("", "Некорректные данные");
                 return View(model);
             }
         }
@@ -78,11 +77,12 @@ namespace BlogBsa.Controllers
             if (ModelState.IsValid)
             {
                 await _tagService.EditTag(model, model.Id);
+                _logger.Info($"Изменен тег - {model.Name}");
                 return RedirectToAction("GetTags", "Tag");
+                
             }
             else
             {
-                ModelState.AddModelError("", "Некорректные данные");
                 return View(model);
             }
         }
@@ -109,7 +109,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveTag(Guid id)
         {
             await _tagService.RemoveTag(id);
-            _logger.LogDebug($"Удаленн тег - {id}");
+            //_logger.Debug("Удален тег");
             return RedirectToAction("GetTags", "Tag");
         }
 

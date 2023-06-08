@@ -3,6 +3,7 @@ using BlogBsa;
 using BlogBsa.DAL;
 using BlogBsa.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
@@ -25,6 +26,11 @@ builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(con
         opts.Password.RequireDigit = false;
     })
     .AddEntityFrameworkStores<BlogDbContext>();
+builder.Logging
+    .ClearProviders()
+    .SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace)
+    .AddConsole()
+    .AddNLog("nlog");
 
 Addiction.AddAddiction(builder, mapper);
 

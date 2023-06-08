@@ -9,12 +9,14 @@ namespace BlogBsa.Service.Implementations
     public class TagService : ITagService
     {
         private readonly ITagRepository _repo;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
+
 
         public TagService(ITagRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
+            //_logger = logger;
         }
 
         public async Task<Guid> CreateTag(TagCreateViewModel model)

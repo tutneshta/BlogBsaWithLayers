@@ -2,12 +2,15 @@
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
+
+         readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public AccountController(IAccountService accountService)
         {
@@ -31,10 +34,17 @@ namespace BlogBsa.Controllers
                 var result = await _accountService.Login(model);
 
                 if (result.Succeeded)
+                {
+                    _logger.Info($"Пользователь {model.Email} залогинился");
+
                     return RedirectToAction("Index", "Home");
+                }
+                
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+
+                    //_logger.Error($"Попытка входа {model.Email}. Неправильный логин и (или) пароль");
                 }
             }
             return View(model);
@@ -63,10 +73,13 @@ namespace BlogBsa.Controllers
 
                 if (result.Succeeded)
                 {
+                    _logger.Info($"Создан новый пользователь {model.UserName}");
                     return RedirectToAction("GetAccounts", "Account");
                 }
                 else
                 {
+                    _logger.Error($"Неудачная попытка создания пользователя {model.UserName}");
+
                     foreach (var error in result.Errors)
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
@@ -95,16 +108,22 @@ namespace BlogBsa.Controllers
         {
             if (ModelState.IsValid)
             {
+                _logger.Info($"Зарегестрирован новый пользователь {model.UserName}");
+
                 var result = await _accountService.Register(model);
 
                 if (result.Succeeded)
                 {
+                    _logger.Info($"Пользователь {model.Email} залогинился");
+
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     foreach (var error in result.Errors)
                     {
+                        _logger.Error($"Попытка входа пользователя {model.UserName} неудачна") ;
+
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
@@ -132,15 +151,19 @@ namespace BlogBsa.Controllers
         [HttpPost]
         public async Task<IActionResult> EditAccount(UserEditViewModel model)
         {
-            var result = await _accountService.EditAccount(model);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
+                await _accountService.EditAccount(model);
+
+                _logger.Info($"редактирование пользователя {model.UserName}");
+
                 return RedirectToAction("GetAccounts", "Account");
             }
+            
             else
             {
-                ModelState.AddModelError("", $"{result.Errors.First().Description}");
+                _logger.Error($"Ошибка редактирования пользователя {model.UserName}");
+
                 return View(model);
             }
         }
@@ -166,7 +189,11 @@ namespace BlogBsa.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveAccount(Guid id)
         {
+            var account = await _accountService.GetAccount(id);
+
             await _accountService.RemoveAccount(id);
+
+            _logger.Info($"удален пользователь {account.UserName}");
 
             return RedirectToAction("GetAccounts", "Account");
         }
@@ -177,9 +204,13 @@ namespace BlogBsa.Controllers
         [Route("Account/Logout")]
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> LogoutAccount(Guid id)
+        public async Task<IActionResult> LogoutAccount()
         {
+
+            _logger.Info($"Пользователь  вышел из приложения");
+
             await _accountService.LogoutAccount();
+
             return RedirectToAction("Index", "Home");
         }
 

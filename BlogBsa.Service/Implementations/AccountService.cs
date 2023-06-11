@@ -15,16 +15,14 @@ namespace BlogBsa.Service.Implementations
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly IPostRepository _postRepo;
         public IMapper _mapper;
 
-        public AccountService(IPostRepository postRepo, RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountService(RoleManager<Role> roleManager, IMapper mapper, UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _roleManager = roleManager;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            _postRepo = postRepo;
         }
 
         public async Task<IdentityResult> Register(UserRegisterViewModel model)
@@ -53,76 +51,55 @@ namespace BlogBsa.Service.Implementations
         public async Task<SignInResult> Login(UserLoginViewModel model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
+
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
+
             return result;
         }
 
-        //public async Task<UserEditViewModel> EditAccount(Guid id)
-        //{
-        //    var user = await _userManager.FindByIdAsync(id.ToString());
-
-        //    //List<Role> allRolesName = _roleManager.Roles.ToList();
-        //    var allRolesName = _roleManager.Roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name })
-        //        .ToList();
-
-        //    foreach (var role in allRolesName)
-        //    {
-        //        if (allRolesName != null)
-        //        {
-        //            foreach (var userRole in user.Roles)
-        //            {
-        //                if (userRole.Id == role.Id)
-        //                {
-        //                    role.IsSelected = true;
-        //                }
-
-        //                break;
-        //            }
-        //        }
-        //    }
-
-        //    var model = new UserEditViewModel
-        //    {
-        //        FirstName = user.FirstName,
-        //        LastName = user.LastName,
-        //        UserName = user.UserName,
-        //        Email = user.Email,
-        //        NewPassword = string.Empty,
-        //        Id = id,
-        //        Roles = allRolesName
-        //        //Roles = allRolesName.Select(r => new RoleViewModel() { Id = new string(r.Id), Name = r.Name }).ToList(),
-        //    };
-
-        //    return model;
-        //}
-
-        public async Task<ChangeRoleViewModel> EditAccount(string id)
+        public async Task<UserEditViewModel> EditAccount(Guid id)
         {
-            var user = await _userManager.FindByIdAsync(id);
+            var user = await _userManager.FindByIdAsync(id.ToString());
 
-            if (user != null)
+            //List<Role> allRolesName = _roleManager.Roles.ToList();
+            var allRolesName = _roleManager.Roles.Select(r => new RoleViewModel() { Id = r.Id, Name = r.Name })
+                .ToList();
+
+            foreach (var role in allRolesName)
             {
-                var userRoles = await _userManager.GetRolesAsync(user);
-                var allRoles = _roleManager.Roles.ToList();
-
-                ChangeRoleViewModel model = new ChangeRoleViewModel
+                if (allRolesName != null)
                 {
-                    Email = user.Email,
-                    UserName = user.UserName,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    AllRoles = allRoles
-                    
-                };
-                return model;
+                    foreach (var userRole in user.Roles)
+                    {
+                        if (userRole.Id == role.Id)
+                        {
+                            role.IsSelected = true;
+                        }
+
+                        break;
+                    }
+                }
             }
 
-            return null;
+            var model = new UserEditViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserName = user.UserName,
+                Email = user.Email,
+                NewPassword = string.Empty,
+                Id = id,
+                Roles = allRolesName
+            };
+
+            return model;
         }
 
-        public async Task<IdentityResult> EditAccount(UserEditViewModel model)
+
+        public async Task EditAccount(UserEditViewModel model)
         {
-            var user = await _userManager.FindByIdAsync(model.Id.ToString());
+            
+                var user = await _userManager.FindByIdAsync(model.Id.ToString());
 
             if (model.FirstName != null)
             {
@@ -145,22 +122,8 @@ namespace BlogBsa.Service.Implementations
                 user.UserName = model.UserName;
             }
 
-            foreach (var role in model.Roles)
-            {
-                var roleName = _roleManager.FindByIdAsync(role.Id.ToString()).Result.Name;
-
-                if (role.IsSelected)
-                {
-                    await _userManager.AddToRoleAsync(user, roleName);
-                }
-                else
-                {
-                    await _userManager.RemoveFromRoleAsync(user, roleName);
-                }
-            }
-
             var result = await _userManager.UpdateAsync(user);
-            return result;
+
         }
 
         public async Task RemoveAccount(Guid id)

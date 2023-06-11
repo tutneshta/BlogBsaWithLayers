@@ -1,6 +1,8 @@
 ﻿using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace BlogBsa.Service.Interfaces
 {
@@ -12,7 +14,7 @@ namespace BlogBsa.Service.Interfaces
 
         Task<SignInResult> Login(UserLoginViewModel model);
 
-        Task<IdentityResult> EditAccount(UserEditViewModel model);
+        Task EditAccount(UserEditViewModel model);
 
         Task<UserEditViewModel> EditAccount(Guid id);
 

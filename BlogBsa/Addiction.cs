@@ -12,18 +12,20 @@ namespace BlogBsa
         public static void AddAddiction(WebApplicationBuilder builder, IMapper mapper1)
         {
             builder.Services
-        .AddSingleton(mapper1)
-        .AddTransient<ICommentRepository, CommentRepository>()
-        .AddTransient<ITagRepository, TagRepository>()
-        .AddTransient<IPostRepository, PostRepository>()
-        .AddTransient<IAccountService, AccountService>()
-        .AddTransient<ICommentService, CommentService>()
-        .AddTransient<IHomeService, HomeService>()
-        .AddTransient<IPostService, PostService>()
-        .AddTransient<ITagService, TagService>()
-        .AddTransient<IRoleService, RoleService>();
+                .AddSingleton(mapper1)
+                .AddTransient<ICommentRepository, CommentRepository>()
+                .AddTransient<ITagRepository, TagRepository>()
+                .AddTransient<IPostRepository, PostRepository>()
+                .AddTransient<IAccountService, AccountService>()
+                .AddTransient<ICommentService, CommentService>()
+                .AddTransient<IHomeService, HomeService>()
+                .AddTransient<IPostService, PostService>()
+                .AddTransient<ITagService, TagService>()
+                .AddTransient<IRoleService, RoleService>();
+                
 
-        
+
+
         }
 
         

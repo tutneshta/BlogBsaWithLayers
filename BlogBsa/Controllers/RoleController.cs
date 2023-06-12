@@ -3,20 +3,21 @@ using BlogBsa.Domain.ViewModels.Roles;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
     public class RoleController : Controller
     {
         private readonly IRoleService _roleService;
-        private readonly ILogger<RoleController> _logger;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private IMapper _mapper;
 
-        public RoleController(IMapper mapper, IRoleService roleService, ILogger<RoleController> logger)
+
+        public RoleController(IMapper mapper, IRoleService roleService)
         {
             _mapper = mapper;
             _roleService = roleService;
-            _logger = logger;
         }
 
         /// <summary>
@@ -42,13 +43,15 @@ namespace BlogBsa.Controllers
             {
                 var roleId = await _roleService.CreateRole(model);
 
-                _logger.LogInformation($"Созданна роль - {model.Name}");
+                _logger.Info($"Созданна роль - {model.Name}");
 
                 return RedirectToAction("GetRoles", "Role");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
+                _logger.Error($"Попытка создания роли {model.Name} неуспешна");
 
                 return View(model);
             }
@@ -81,13 +84,15 @@ namespace BlogBsa.Controllers
             {
                 await _roleService.EditRole(model);
 
-                _logger.LogDebug($"Измененна роль - {model.Name}");
+                _logger.Info($"Измененна роль - {model.Name}");
 
                 return RedirectToAction("GetRoles", "Role");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
+                _logger.Error($"попытка изменения роли {model.Name} неуспешна");
 
                 return View(model);
             }
@@ -118,7 +123,7 @@ namespace BlogBsa.Controllers
         {
             await _roleService.RemoveRole(id);
 
-            _logger.LogDebug($"Удаленна роль - {id}");
+            _logger.Info($"Удаленна роль - {id}");
 
             return RedirectToAction("GetRoles", "Role");
         }

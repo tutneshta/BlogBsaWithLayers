@@ -10,7 +10,7 @@ namespace BlogBsa.Controllers
     {
         private readonly IAccountService _accountService;
 
-         readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public AccountController(IAccountService accountService)
         {
@@ -44,7 +44,7 @@ namespace BlogBsa.Controllers
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
 
-                    //_logger.Error($"Попытка входа {model.Email}. Неправильный логин и (или) пароль");
+                    _logger.Error($"Попытка входа {model.Email}. Неправильный логин и (или) пароль");
                 }
             }
             return View(model);

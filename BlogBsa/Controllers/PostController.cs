@@ -4,6 +4,7 @@ using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
@@ -11,6 +12,7 @@ namespace BlogBsa.Controllers
     {
         private readonly IPostService _postService;
         private readonly UserManager<User> _userManager;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public PostController(IPostService postService, UserManager<User> userManager)
         {
@@ -59,10 +61,14 @@ namespace BlogBsa.Controllers
             {
                 ModelState.AddModelError("", "Не все поля заполненны");
 
+                _logger.Error($"Попытка создания поста неудачна. Не все поля заполнены");
+
                 return View(model);
             }
 
-            var postId = await _postService.CreatePost(model);
+            await _postService.CreatePost(model);
+
+            _logger.Info($"Создан новый пост {model.Title}");
 
             return RedirectToAction("GetPosts", "Post");
         }
@@ -91,10 +97,14 @@ namespace BlogBsa.Controllers
             {
                 ModelState.AddModelError("", "Не все поля заполненны");
 
+                _logger.Error($"Попытка редактирования поста неудачна. Не все поля заполнены");
+
                 return View(model);
             }
 
             await _postService.EditPost(model, Id);
+
+            _logger.Info($"Отредактирован пост {model.Title}");
 
             return RedirectToAction("GetPosts", "Post");
         }
@@ -122,6 +132,8 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemovePost(Guid id)
         {
             await _postService.RemovePost(id);
+
+            _logger.Info($"удален пост с id: {id}");
 
             return RedirectToAction("GetPosts", "Post");
         }

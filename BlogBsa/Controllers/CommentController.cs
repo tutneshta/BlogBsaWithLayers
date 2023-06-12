@@ -4,6 +4,7 @@ using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
@@ -11,6 +12,7 @@ namespace BlogBsa.Controllers
     {
         private readonly ICommentService _commentService;
         private readonly UserManager<User> _userManager;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public CommentController(ICommentService commentService, UserManager<User> userManager)
         {
@@ -43,6 +45,8 @@ namespace BlogBsa.Controllers
 
             var post = _commentService.CreateComment(model, new Guid(user.Id));
 
+            _logger.Info($"Пользователь {user.UserName} добавил комментарий");
+
             return RedirectToAction("GetPosts", "Post");
         }
 
@@ -70,11 +74,15 @@ namespace BlogBsa.Controllers
             {
                 await _commentService.EditComment(model, model.Id);
 
+                _logger.Info($"изменение комментария {model.Title} автор {model.Author}");
+
                 return RedirectToAction("GetPosts", "Post");
             }
             else
             {
                 ModelState.AddModelError("", "Некорректные данные");
+
+                _logger.Error($"Попытка редактирования комментария {model.Title} неудачна. Некорректные данные");
 
                 return View(model);
             }
@@ -92,7 +100,7 @@ namespace BlogBsa.Controllers
 
                 await RemoveComment(id);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("GetPosts", "Post");
         }
 
         /// <summary>
@@ -104,7 +112,9 @@ namespace BlogBsa.Controllers
         {
             await _commentService.RemoveComment(id);
 
-            return RedirectToAction("Index", "Home");
+            _logger.Info($"удален комментарий c id: {id.ToString()}");
+
+            return RedirectToAction("GetPosts", "Post");
         }
     }
 }

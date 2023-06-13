@@ -1,6 +1,7 @@
 ﻿using BlogBsa.Domain.ViewModels.Users;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 

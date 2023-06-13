@@ -53,8 +53,8 @@ namespace BlogBsa.Controllers
                 if (statusCode == 404 || statusCode == 500)
                 {
                     var viewName = statusCode.ToString();
-                    _logger.LogWarning($"Произошла ошибка - {statusCode}\n{viewName}");
-                    return View(viewName);
+                    _logger.LogInformation($"Произошла ошибка - {statusCode}\n{viewName}");
+                    return View("402");
                 }
                 else
                     return View("500");

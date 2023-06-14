@@ -14,5 +14,6 @@ namespace BlogBsa.Service.Interfaces
         Task<List<Role>> GetRoles();
 
         Task<Role?> GetRole(Guid id);
+
     }
 }

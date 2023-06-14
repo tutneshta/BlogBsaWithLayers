@@ -5,26 +5,18 @@ using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace BlogBsa.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
-        private readonly RoleManager<Role> _roleManager;
         private readonly IHomeService _homeService;
-        private readonly ILogger<HomeController> _logger;
-        private IMapper _mapper;
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public HomeController(RoleManager<Role> roleManager, UserManager<User> userManager, SignInManager<User> signInManager, IMapper mapper, IHomeService homeService, ILogger<HomeController> logger)
+        public HomeController(IMapper mapper, IHomeService homeService)
         {
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
             _homeService = homeService;
-            _mapper = mapper;
-            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
@@ -53,7 +45,9 @@ namespace BlogBsa.Controllers
                 if (statusCode == 404 || statusCode == 500)
                 {
                     var viewName = statusCode.ToString();
-                    _logger.LogInformation($"Произошла ошибка - {statusCode}\n{viewName}");
+
+                    _logger.Error($"Произошла ошибка - {statusCode}\n{viewName}");
+
                     return View("402");
                 }
                 else

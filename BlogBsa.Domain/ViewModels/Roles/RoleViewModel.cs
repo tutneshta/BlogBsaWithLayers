@@ -6,7 +6,6 @@ namespace BlogBsa.Domain.ViewModels.Roles
     {
         public string Id { get; set; }
 
-        [Required]
         [Display(Name = "Name")]
         public string? Name { get; set; }
 

@@ -75,6 +75,7 @@ namespace BlogBsa.Controllers
                 if (result.Succeeded)
                 {
                     _logger.Info($"Создан новый пользователь {model.UserName}");
+
                     return RedirectToAction("GetAccounts", "Account");
                 }
                 else
@@ -133,7 +134,7 @@ namespace BlogBsa.Controllers
         }
 
         /// <summary>
-        /// [Get] Метод, редактирования
+        /// [Get] Метод, редактирования аккаунта
         /// </summary>
         [Route("Account/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
@@ -145,7 +146,7 @@ namespace BlogBsa.Controllers
         }
 
         /// <summary>
-        /// [Post] Метод, редактирования
+        /// [Post] Метод, редактирования аккаунта
         /// </summary>
         [Route("Account/Edit")]
         [Authorize(Roles = "Администратор, Модератор")]
@@ -207,7 +208,6 @@ namespace BlogBsa.Controllers
         [HttpPost]
         public async Task<IActionResult> LogoutAccount()
         {
-
             _logger.Info($"Пользователь  вышел из приложения");
 
             await _accountService.LogoutAccount();
@@ -220,7 +220,6 @@ namespace BlogBsa.Controllers
         /// </summary>
         [Route("Account/Get")]
         [Authorize(Roles = "Администратор, Модератор")]
-        [HttpGet]
         public async Task<IActionResult> GetAccounts()
         {
             var users = await _accountService.GetAccounts();
@@ -233,10 +232,10 @@ namespace BlogBsa.Controllers
         /// </summary>
         [Route("Account/Details")]
         [Authorize(Roles = "Администратор, Модератор")]
-        [HttpGet]
         public async Task<IActionResult> DetailsAccount(Guid id)
         {
             var model = await _accountService.GetAccount(id);
+
             return View(model);
         }
     }

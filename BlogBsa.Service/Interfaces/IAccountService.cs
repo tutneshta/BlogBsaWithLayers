@@ -14,7 +14,7 @@ namespace BlogBsa.Service.Interfaces
 
         Task<SignInResult> Login(UserLoginViewModel model);
 
-        Task EditAccount(UserEditViewModel model);
+        Task<IdentityResult> EditAccount(UserEditViewModel model);
 
         Task<UserEditViewModel> EditAccount(Guid id);
 

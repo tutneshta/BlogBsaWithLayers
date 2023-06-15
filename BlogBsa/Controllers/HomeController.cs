@@ -26,12 +26,6 @@ namespace BlogBsa.Controllers
             return View(new MainViewModel());
         }
 
-        [Authorize]
-        public IActionResult MyPage()
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();
@@ -42,7 +36,7 @@ namespace BlogBsa.Controllers
         {
             if (statusCode.HasValue)
             {
-                if (statusCode == 404 || statusCode == 500)
+                if (statusCode is 404 or 500)
                 {
                     var viewName = statusCode.ToString();
 

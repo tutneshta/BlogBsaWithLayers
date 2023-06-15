@@ -30,18 +30,21 @@ namespace BlogBsa.DAL.Repositories
         public async Task AddComment(Comment comment)
         {
             _context.Comments.Add(comment);
+
             await SaveChangesAsync();
         }
 
         public async Task UpdateComment(Comment comment)
         {
             _context.Comments.Update(comment);
+
             await SaveChangesAsync();
         }
 
         public async Task RemoveComment(Guid id)
         {
             _context.Comments.Remove(GetComment(id));
+
             await SaveChangesAsync();
         }
 

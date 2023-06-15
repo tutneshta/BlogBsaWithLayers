@@ -38,6 +38,7 @@ namespace BlogBsa.Service.Implementations
                 await _signInManager.SignInAsync(user, false);
 
                 var userRole = new Role() { Name = "Пользователь", Description = "Имеет ограниченные права" };
+
                 await _roleManager.CreateAsync(userRole);
 
                 var currentUser = await _userManager.FindByIdAsync(Convert.ToString(user.Id));
@@ -56,6 +57,11 @@ namespace BlogBsa.Service.Implementations
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
 
+            if (user == null)
+            {
+                return SignInResult.Failed;
+            }
+
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
 
             return result;
@@ -67,7 +73,7 @@ namespace BlogBsa.Service.Implementations
 
             var allRolesName = _roleManager.Roles.ToList();
 
-            UserEditViewModel model = new UserEditViewModel
+            var model = new UserEditViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,

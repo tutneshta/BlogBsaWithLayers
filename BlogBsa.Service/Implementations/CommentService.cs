@@ -20,7 +20,7 @@ namespace BlogBsa.Service.Implementations
             _userManager = userManager;
         }
 
-        public async Task<Guid> CreateComment(CommentCreateViewModel model, Guid UserId)
+        public async Task<Guid> CreateComment(CommentCreateViewModel model, Guid userId)
         {
             var comment = new Comment
             {
@@ -28,11 +28,12 @@ namespace BlogBsa.Service.Implementations
                 Body = model.Description,
                 Author = model.Author,
                 PostId = model.PostId,
-                AuthorId = UserId,
-                AuthorName = _userManager.FindByIdAsync(UserId.ToString()).Result.UserName,
+                AuthorId = userId,
+                AuthorName = _userManager.FindByIdAsync(userId.ToString()).Result.UserName,
             };
 
             await _commentRepo.AddComment(comment);
+
             return comment.Id;
         }
 

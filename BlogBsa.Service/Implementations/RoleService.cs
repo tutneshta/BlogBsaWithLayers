@@ -10,12 +10,10 @@ namespace BlogBsa.Service.Implementations
     public class RoleService : IRoleService
     {
         private readonly RoleManager<Role> _roleManager;
-        private readonly UserManager<User> _userManager;
 
-        public RoleService(RoleManager<Role> roleManager, UserManager<User> userManager)
+        public RoleService(RoleManager<Role> roleManager)
         {
             _roleManager = roleManager;
-            _userManager = userManager;
         }
 
         public async Task<Guid> CreateRole(RoleCreateViewModel model)
@@ -30,13 +28,17 @@ namespace BlogBsa.Service.Implementations
         public async Task EditRole(RoleEditViewModel model)
         {
             if (string.IsNullOrEmpty(model.Name) && model.Description == null)
+
                 return;
 
             var role = await _roleManager.FindByIdAsync(model.Id.ToString());
 
             if (!string.IsNullOrEmpty(model.Name))
+
                 role.Name = model.Name;
+
             if (model.Description != null)
+
                 role.Description = model.Description;
 
             await _roleManager.UpdateAsync(role);

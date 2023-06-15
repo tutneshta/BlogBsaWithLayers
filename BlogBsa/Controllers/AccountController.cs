@@ -1,7 +1,6 @@
 ﻿using BlogBsa.Domain.ViewModels.Users;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 
@@ -11,7 +10,7 @@ namespace BlogBsa.Controllers
     {
         private readonly IAccountService _accountService;
 
-        readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public AccountController(IAccountService accountService)
         {
@@ -142,6 +141,7 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> EditAccount(Guid id)
         {
             var model = await _accountService.EditAccount(id);
+
             return View(model);
         }
 
@@ -179,7 +179,9 @@ namespace BlogBsa.Controllers
         public async Task<IActionResult> RemoveAccount(Guid id, bool confirm = true)
         {
             if (confirm)
+
                 await RemoveAccount(id);
+
             return RedirectToAction("GetAccounts", "Account");
         }
 

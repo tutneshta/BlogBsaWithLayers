@@ -22,12 +22,8 @@ namespace BlogBsa
                 .AddTransient<IPostService, PostService>()
                 .AddTransient<ITagService, TagService>()
                 .AddTransient<IRoleService, RoleService>();
-                
-
-
-
+  
         }
 
-        
     }
 }

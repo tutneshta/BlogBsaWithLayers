@@ -48,7 +48,9 @@ namespace BlogBsa.Service.Implementations
             if (model.Tags != null)
             {
                 var postTags = model.Tags.Where(t => t.IsSelected == true).ToList();
+
                 var tagsId = postTags.Select(t => t.Id).ToList();
+
                 dbTags = _tagRepo.GetAllTags().Where(t => tagsId.Contains(t.Id)).ToList();
             }
 
@@ -62,9 +64,11 @@ namespace BlogBsa.Service.Implementations
             };
 
             var user = await _userManager.FindByIdAsync(model.AuthorId);
+
             user.Posts.Add(post);
 
             await _repo.AddPost(post);
+
             await _userManager.UpdateAsync(user);
 
             return post.Id;
@@ -83,7 +87,9 @@ namespace BlogBsa.Service.Implementations
                     foreach (var postTag in post.Tags)
                     {
                         if (postTag.Id != tag.Id) continue;
+
                         tag.IsSelected = true;
+
                         break;
                     }
                 }
@@ -100,16 +106,18 @@ namespace BlogBsa.Service.Implementations
             return model;
         }
 
-        public async Task EditPost(PostEditViewModel model, Guid Id)
+        public async Task EditPost(PostEditViewModel model, Guid id)
         {
-            var post = _repo.GetPost(Id);
+            var post = _repo.GetPost(id);
 
             post.Title = model.Title;
+
             post.Body = model.Body;
 
             foreach (var tag in model.Tags)
             {
                 var tagChanged = _tagRepo.GetTag(tag.Id);
+
                 if (tag.IsSelected)
                 {
                     post.Tags.Add(tagChanged);
@@ -138,9 +146,11 @@ namespace BlogBsa.Service.Implementations
         public async Task<Post> ShowPost(Guid id)
         {
             var post = _repo.GetPost(id);
+
             var user = await _userManager.FindByIdAsync(post.AuthorId.ToString());
 
             var comments = _commentRepo.GetCommentsByPostId(post.Id);
+
             post.Id = id;
 
             foreach (var comment in comments)

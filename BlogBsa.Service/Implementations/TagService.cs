@@ -16,12 +16,12 @@ namespace BlogBsa.Service.Implementations
         {
             _repo = repo;
             _mapper = mapper;
-            //_logger = logger;
         }
 
         public async Task<Guid> CreateTag(TagCreateViewModel model)
         {
             var tag = _mapper.Map<Tag>(model);
+
             await _repo.AddTag(tag);
 
             return tag.Id;

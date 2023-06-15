@@ -32,13 +32,16 @@ namespace BlogBsa.DAL.Repositories
         public async Task UpdatePost(Post post)
         {
             _context.Posts.Update(post);
+
             await SaveChangesAsync();
         }
 
         public async Task RemovePost(Guid id)
         {
             var post = GetPost(id);
+
             _context.Posts.Remove(post);
+
             await SaveChangesAsync();
         }
 

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BlogBsa.DAL.Interfaces;
+﻿
 using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -11,12 +10,10 @@ namespace BlogBsa.Controllers
     public class TagController : Controller
     {
         private readonly ITagService _tagService;
-        private IMapper _mapper;
         readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public TagController(IMapper mapper, ITagService tagService)
+        public TagController(ITagService tagService)
         {
-            _mapper = mapper;
             _tagService = tagService;
         }
 

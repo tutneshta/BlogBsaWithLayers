@@ -37,9 +37,9 @@ namespace BlogBsa.Controllers
         /// </summary>
         [HttpPost]
         [Route("Comment/CreateComment")]
-        public async Task<IActionResult> CreateComment(CommentCreateViewModel model, Guid PostId)
+        public async Task<IActionResult> CreateComment(CommentCreateViewModel model, Guid postId)
         {
-            model.PostId = PostId;
+            model.PostId = postId;
 
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
 

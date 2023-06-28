@@ -10,7 +10,7 @@ namespace BlogBsa.Controllers
     public class TagController : Controller
     {
         private readonly ITagService _tagService;
-        readonly Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public TagController(ITagService tagService)
         {
@@ -139,6 +139,7 @@ namespace BlogBsa.Controllers
             var tags = await _tagService.GetTag(id);
 
             return View(tags);
+
         }
     }
 }

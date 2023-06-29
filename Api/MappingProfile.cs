@@ -1,9 +1,10 @@
-﻿using Api.Domain.Entity;
-using Api.Domain.ViewModels.Comments;
-using Api.Domain.ViewModels.Posts;
-using Api.Domain.ViewModels.Tags;
-using Api.Domain.ViewModels.Users;
+﻿
 using AutoMapper;
+using BlogBsa.Domain.Entity;
+using BlogBsa.Domain.ViewModels.Comments;
+using BlogBsa.Domain.ViewModels.Posts;
+using BlogBsa.Domain.ViewModels.Tags;
+using BlogBsa.Domain.ViewModels.Users;
 
 namespace Api
 {

@@ -1,14 +1,14 @@
 using Api;
-using Api.DAL;
-using Api.Domain.Entity;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using BlogBsa.Domain.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers();;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -19,8 +19,11 @@ var mapperConfig = new MapperConfiguration((v) =>
 });
 
 var mapper = mapperConfig.CreateMapper();
+var assembly = Assembly.GetAssembly(typeof(MappingProfile));
+builder.Services.AddAutoMapper(assembly);
+
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(connection))
+builder.Services.AddDbContext<BlogBsa.DAL.BlogDbContext>(options => options.UseSqlServer(connection))
     .AddIdentity<User, Role>(opts =>
     {
         opts.Password.RequiredLength = 5;
@@ -29,9 +32,7 @@ builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(con
         opts.Password.RequireUppercase = false;
         opts.Password.RequireDigit = false;
     })
-    .AddEntityFrameworkStores<BlogDbContext>();
-
-
+    .AddEntityFrameworkStores<BlogBsa.DAL.BlogDbContext>();
 
 builder.Services.AddAuthentication(optionts => optionts.DefaultScheme = "Cookies")
     .AddCookie("Cookies", options =>
@@ -58,10 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

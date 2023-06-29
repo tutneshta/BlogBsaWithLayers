@@ -1,6 +1,5 @@
 ﻿
-using Api.Domain.Entity;
-using Api.Service.Interfaces;
+using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,13 +22,38 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех тегов
         /// </summary>
-       // [Authorize(Roles = "Администратор")]
+        //[Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetTags")]
         public async Task<List<Tag>> GetTags()
         {
             var tags = await _tagSerive.GetTags();
             return tags;
+        }
+
+        /// <summary>
+        /// Добавление тега
+        /// </summary>
+        //[Authorize(Roles = "Администратор")]
+        [HttpPost]
+        [Route("AddTag")]
+        public async Task<IActionResult> AddTag(TagCreateViewModel model)
+        {
+            var result = await _tagSerive.CreateTag(model);
+            return StatusCode(201);
+        }
+
+        /// <summary>
+        /// Редактирование тега
+        /// </summary>
+        //[Authorize(Roles = "Администратор")]
+        [HttpPatch]
+        [Route("EditTag")]
+        public async Task<IActionResult> EditTag(TagEditViewModel model)
+        {
+            await _tagSerive.EditTag(model.Id);
+
+            return StatusCode(201);
         }
     }
 }

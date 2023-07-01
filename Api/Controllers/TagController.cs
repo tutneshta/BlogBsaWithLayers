@@ -12,8 +12,7 @@ namespace Api.Controllers
     public class TagController : Controller
     {
         private readonly ITagService _tagSerive;
-       
-
+        
         public TagController(ITagService tagService)
         {
             _tagSerive = tagService;
@@ -22,7 +21,7 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех тегов
         /// </summary>
-        //[Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetTags")]
         public async Task<List<Tag>> GetTags()
@@ -34,7 +33,7 @@ namespace Api.Controllers
         /// <summary>
         /// Добавление тега
         /// </summary>
-        //[Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddTag")]
         public async Task<IActionResult> AddTag(TagCreateViewModel model)
@@ -46,12 +45,25 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование тега
         /// </summary>
-        //[Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditTag")]
         public async Task<IActionResult> EditTag(TagEditViewModel model)
         {
-            await _tagSerive.EditTag(model.Id);
+            await _tagSerive.EditTag(model, model.Id);
+
+            return StatusCode(201);
+        }
+
+        /// <summary>
+        /// Удаление тега
+        /// </summary>
+        [Authorize(Roles = "Администратор")]
+        [HttpDelete]
+        [Route("RemoveTag")]
+        public async Task<IActionResult> RemoveTag(Guid id)
+        {
+            await _tagSerive.RemoveTag(id);
 
             return StatusCode(201);
         }

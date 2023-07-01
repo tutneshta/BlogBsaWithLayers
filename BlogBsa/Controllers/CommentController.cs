@@ -20,7 +20,7 @@ namespace BlogBsa.Controllers
             _userManager = userManager;
         }
 
-        // <summary>
+        /// <summary>
         /// [Get] Метод, добавление комментария
         /// </summary>
         [HttpGet]
@@ -32,7 +32,7 @@ namespace BlogBsa.Controllers
             return View(model);
         }
 
-        // <summary>
+        /// <summary>
         /// [Post] Метод, добавление комментария
         /// </summary>
         [HttpPost]

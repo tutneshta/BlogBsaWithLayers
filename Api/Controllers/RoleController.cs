@@ -20,6 +20,8 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех ролей
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetRoles")]
@@ -33,6 +35,8 @@ namespace Api.Controllers
         /// <summary>
         /// Добавление роли
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddRole")]
@@ -46,6 +50,8 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование роли
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditRole")]
@@ -59,6 +65,8 @@ namespace Api.Controllers
         /// <summary>
         /// Удаление роли
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveRole")]

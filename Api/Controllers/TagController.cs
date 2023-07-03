@@ -21,6 +21,8 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех тегов
         /// </summary>
+        /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetTags")]
@@ -33,6 +35,8 @@ namespace Api.Controllers
         /// <summary>
         /// Добавление тега
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddTag")]
@@ -45,6 +49,8 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование тега
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditTag")]
@@ -58,6 +64,8 @@ namespace Api.Controllers
         /// <summary>
         /// Удаление тега
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveTag")]

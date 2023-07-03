@@ -23,6 +23,8 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех комментарий поста
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetPostComment")]
@@ -53,6 +55,8 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование комментария
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditComment")]
@@ -67,6 +71,8 @@ namespace Api.Controllers
         /// <summary>
         /// Удаление комментария
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveComment")]

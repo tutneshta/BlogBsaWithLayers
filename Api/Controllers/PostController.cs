@@ -19,6 +19,8 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех постов
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetPosts")]
@@ -34,7 +36,7 @@ namespace Api.Controllers
         /// <summary>
         /// Добавление поста
         /// </summary>
-        [Authorize(Roles = "Администратор")]
+        //[Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddPost")]
         public async Task<IActionResult> AddPost(PostCreateViewModel model)
@@ -47,6 +49,8 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование поста
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditPost")]
@@ -60,6 +64,8 @@ namespace Api.Controllers
         /// <summary>
         /// Удаление поста
         /// </summary>
+        /// /// <remarks>
+        /// need administrator rights</remarks>
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemovePost")]

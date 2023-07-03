@@ -11,6 +11,9 @@ using BlogBsa.Domain.ViewModels.Users;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с аккаунтами
+    /// </summary>
     [ApiController]
     [Route("[controller]")]
     public class AccountController : Controller
@@ -27,6 +30,12 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех пользователей
         /// </summary>
+        /// <remarks>
+        /// need administrator rights</remarks>
+        /// <response code="200">Возвращает список пользователей</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetUsers")]
@@ -40,6 +49,10 @@ namespace Api.Controllers
         /// <summary>
         /// Авторизация Аккаунта
         /// </summary>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="500">Введенный пароль не корректен или не найден аккаунт</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         [Route("authenticate")]
         public async Task<IActionResult> Authenticate(UserLoginViewModel model)
@@ -91,6 +104,14 @@ namespace Api.Controllers
         /// <summary>
         /// Добавление пользователя
         /// </summary>
+        /// <remarks>
+        /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        /// <response code="400">Пароли не совпадают</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddUser")]
@@ -104,6 +125,14 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование пользователя
         /// </summary>
+        /// <remarks>
+        /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="400">Пароли не совпадают</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditUser")]
@@ -111,15 +140,16 @@ namespace Api.Controllers
         {
             var result = await _accountService.EditAccount(model);
 
-            if (result.Succeeded)
-                return StatusCode(201);
-            else
-                return StatusCode(204);
+            return StatusCode(result.Succeeded ? 201 : 204);
         }
 
         /// <summary>
         /// Удаление пользователя
         /// </summary>
+        /// <remarks>
+        /// need administrator rights</remarks>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveUser")]

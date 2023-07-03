@@ -23,7 +23,7 @@ namespace Api.Controllers
         /// <summary>
         /// Получение всех комментарий поста
         /// </summary>
-        //[Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetPostComment")]
         public async Task<IEnumerable<Comment>> GetUsers(Guid id)
@@ -53,7 +53,7 @@ namespace Api.Controllers
         /// <summary>
         /// Редактирование комментария
         /// </summary>
-        //[Authorize(Roles = "Администратор")]
+        [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditComment")]
         public async Task<IActionResult> EditComment(CommentEditViewModel model)

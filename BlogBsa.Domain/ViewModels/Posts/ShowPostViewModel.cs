@@ -8,7 +8,7 @@ public class ShowPostViewModel
 
     public string AuthorId { get; set; }
 
-    public List<TagViewModel> Tags { get; set; }
+    public IEnumerable<string> Tags { get; set; }
 
     public string Title { get; set; }
 

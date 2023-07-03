@@ -26,7 +26,12 @@ namespace Api
                 .AddScoped<IAccountService, AccountService>()
 
                 .AddScoped<ICommentRepository, CommentRepository>()
-                .AddScoped<ICommentService, CommentService>();
+                .AddScoped<ICommentService, CommentService>()
+
+                .AddScoped<IPostService, PostService>()
+                .AddScoped<IPostRepository, PostRepository>()
+
+                .AddScoped<IRoleService, RoleService>();
 
 
 

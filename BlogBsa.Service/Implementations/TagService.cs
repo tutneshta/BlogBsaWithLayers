@@ -11,7 +11,6 @@ namespace BlogBsa.Service.Implementations
         private readonly ITagRepository _repo;
         private readonly IMapper _mapper;
 
-
         public TagService(ITagRepository repo, IMapper mapper)
         {
             _repo = repo;

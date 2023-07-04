@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Comments;
 using BlogBsa.Domain.ViewModels.Posts;

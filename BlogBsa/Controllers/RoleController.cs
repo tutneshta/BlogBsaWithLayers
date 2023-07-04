@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using BlogBsa.Domain.Entity;
-using BlogBsa.Domain.ViewModels.Roles;
+﻿using BlogBsa.Domain.ViewModels.Roles;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 
@@ -13,7 +10,6 @@ namespace BlogBsa.Controllers
     {
         private readonly IRoleService _roleService;
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
-
 
         public RoleController(IRoleService roleService)
         {
@@ -140,6 +136,5 @@ namespace BlogBsa.Controllers
 
             return View(roles);
         }
-
     }
 }

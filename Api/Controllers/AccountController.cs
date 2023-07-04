@@ -1,13 +1,13 @@
 ﻿using BlogBsa.Domain.Entity;
+using BlogBsa.Domain.ViewModels.Users;
 using BlogBsa.Service.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Authentication;
 using System.Security.Claims;
-using BlogBsa.Domain.ViewModels.Users;
 
 namespace Api.Controllers
 {
@@ -96,7 +96,6 @@ namespace Api.Controllers
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
-
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
             return StatusCode(200);
         }
@@ -159,6 +158,5 @@ namespace Api.Controllers
 
             return StatusCode(201);
         }
-
     }
 }

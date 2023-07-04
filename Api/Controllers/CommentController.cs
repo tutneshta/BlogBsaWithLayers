@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с комментариями
+    /// </summary>
     [ApiController]
     [Route("Controller")]
     public class CommentController : Controller
@@ -25,6 +28,10 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает список комментариев</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetPostComment")]
@@ -38,6 +45,8 @@ namespace Api.Controllers
         /// <summary>
         /// Создания комментария к посту
         /// </summary>
+        /// <response code="200">Возвращает статус ОК</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         //[Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("CreateComment")]
@@ -57,15 +66,18 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
-        [Authorize(Roles = "Администратор")]
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditComment")]
         public async Task<IActionResult> EditComment(CommentEditViewModel model)
-        { 
+        {
             await _commentService.EditComment(model, model.Id);
-          
-                return StatusCode(201);
-         
+
+            return StatusCode(201);
         }
 
         /// <summary>
@@ -73,6 +85,10 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveComment")]

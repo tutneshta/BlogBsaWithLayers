@@ -39,7 +39,6 @@ namespace BlogBsa.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                
                 else
                 {
                     ModelState.AddModelError("", "Неправильный логин и (или) пароль");
@@ -123,7 +122,7 @@ namespace BlogBsa.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        _logger.Error($"Попытка входа пользователя {model.UserName} неудачна") ;
+                        _logger.Error($"Попытка входа пользователя {model.UserName} неудачна");
 
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
@@ -161,7 +160,6 @@ namespace BlogBsa.Controllers
 
                 return RedirectToAction("GetAccounts", "Account");
             }
-            
             else
             {
                 _logger.Error($"Ошибка редактирования пользователя {model.UserName}");

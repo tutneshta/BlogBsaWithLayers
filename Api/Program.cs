@@ -1,19 +1,15 @@
 using Api;
 using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using BlogBsa.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Options;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddControllers(); ;
 
-builder.Services.AddControllers();;
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -22,12 +18,10 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "BlogBsa API",
         Description = "Blog created by Bury",
-
     });
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
-
 
 var mapperConfig = new MapperConfiguration((v) =>
 {
@@ -35,7 +29,9 @@ var mapperConfig = new MapperConfiguration((v) =>
 });
 
 var mapper = mapperConfig.CreateMapper();
+
 var assembly = Assembly.GetAssembly(typeof(MappingProfile));
+
 builder.Services.AddAutoMapper(assembly);
 
 string? connection = builder.Configuration.GetConnectionString("DefaultConnection");

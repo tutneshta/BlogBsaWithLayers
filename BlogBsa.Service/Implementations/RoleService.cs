@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using BlogBsa.Domain.Entity;
+﻿using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Roles;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace BlogBsa.Service.Implementations
 {
@@ -19,7 +17,7 @@ namespace BlogBsa.Service.Implementations
         public async Task<Guid> CreateRole(RoleCreateViewModel model)
         {
             var role = new Role() { Name = model.Name, Description = model.Description };
-           
+
             await _roleManager.CreateAsync(role);
 
             return Guid.Parse(role.Id);
@@ -47,7 +45,7 @@ namespace BlogBsa.Service.Implementations
         public async Task RemoveRole(Guid id)
         {
             var role = await _roleManager.FindByIdAsync(id.ToString());
-            
+
             await _roleManager.DeleteAsync(role);
         }
 
@@ -60,9 +58,5 @@ namespace BlogBsa.Service.Implementations
         {
             return await _roleManager.FindByIdAsync(id.ToString());
         }
-
     }
 }
-     
-
-        

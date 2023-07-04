@@ -1,7 +1,6 @@
 ﻿using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Users;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace BlogBsa.Service.Interfaces

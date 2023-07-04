@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using BlogBsa.DAL.Interfaces;
 using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels.Roles;
 using BlogBsa.Domain.ViewModels.Users;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Policy;
-using System.Web.Http.ModelBinding;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace BlogBsa.Service.Implementations
@@ -30,7 +27,7 @@ namespace BlogBsa.Service.Implementations
         public async Task<IdentityResult> Register(UserRegisterViewModel model)
         {
             var user = _mapper.Map<User>(model);
-            
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)

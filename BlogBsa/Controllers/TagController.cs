@@ -1,5 +1,4 @@
-﻿
-using BlogBsa.Domain.ViewModels.Tags;
+﻿using BlogBsa.Domain.ViewModels.Tags;
 using BlogBsa.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +72,6 @@ namespace BlogBsa.Controllers
         [HttpPost]
         public async Task<IActionResult> EditTag(TagEditViewModel model, Guid id)
         {
-
             if (ModelState.IsValid)
             {
                 await _tagService.EditTag(model, id);
@@ -81,7 +79,6 @@ namespace BlogBsa.Controllers
                 _logger.Info($"Изменен тег - {model.Name}");
 
                 return RedirectToAction("GetTags", "Tag");
-                
             }
             else
             {
@@ -139,7 +136,6 @@ namespace BlogBsa.Controllers
             var tags = await _tagService.GetTag(id);
 
             return View(tags);
-
         }
     }
 }

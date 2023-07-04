@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using BlogBsa.Domain.Entity;
 using BlogBsa.Domain.ViewModels;
 using BlogBsa.Service.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
 

@@ -3,7 +3,6 @@ using BlogBsa.DAL.Interfaces;
 using BlogBsa.DAL.Repositories;
 using BlogBsa.Service.Implementations;
 using BlogBsa.Service.Interfaces;
-using NLog.Extensions.Logging;
 
 namespace BlogBsa
 {
@@ -22,8 +21,6 @@ namespace BlogBsa
                 .AddTransient<IPostService, PostService>()
                 .AddTransient<ITagService, TagService>()
                 .AddTransient<IRoleService, RoleService>();
-  
         }
-
     }
 }

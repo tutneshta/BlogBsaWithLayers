@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    /// <summary>
+    /// контроллер для работы с ролями
+    /// </summary>
     [ApiController]
     [Route("[Controller]")]
     public class RoleController : Controller
@@ -22,13 +25,17 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает список ролей</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpGet]
         [Route("GetRoles")]
         public async Task<IEnumerable<Role>> GetRoles()
         {
             var roles = await _roleService.GetRoles();
-            
+
             return roles;
         }
 
@@ -37,6 +44,10 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpPost]
         [Route("AddRole")]
@@ -52,6 +63,10 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpPatch]
         [Route("EditRole")]
@@ -67,6 +82,10 @@ namespace Api.Controllers
         /// </summary>
         /// /// <remarks>
         /// need administrator rights</remarks>
+        /// <response code="200">Возвращает статус ОК</response>
+        /// <response code="404">Необходимы права администратора</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Authorize(Roles = "Администратор")]
         [HttpDelete]
         [Route("RemoveRole")]

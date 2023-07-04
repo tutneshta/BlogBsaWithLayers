@@ -1,10 +1,8 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using BlogBsa.DAL.Interfaces;
 using BlogBsa.DAL.Repositories;
 using BlogBsa.Service.Implementations;
 using BlogBsa.Service.Interfaces;
-
 
 namespace Api
 {
@@ -32,11 +30,6 @@ namespace Api
                 .AddScoped<IPostRepository, PostRepository>()
 
                 .AddScoped<IRoleService, RoleService>();
-
-
-
-
         }
-
     }
 }

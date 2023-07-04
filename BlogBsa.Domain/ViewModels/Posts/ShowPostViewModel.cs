@@ -1,6 +1,4 @@
-﻿using BlogBsa.Domain.ViewModels.Tags;
-
-namespace BlogBsa.Domain.ViewModels.Posts;
+﻿namespace BlogBsa.Domain.ViewModels.Posts;
 
 public class ShowPostViewModel
 {
